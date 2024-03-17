@@ -1,0 +1,154 @@
+---
+title: "Skrapowanie"
+output: html_notebook
+---
+
+
+```{r}
+#Potrzebne biblioteki
+library(rvest)
+library(dplyr)
+library(tidyverse)
+library(purrr)
+library(stringr)
+library(ggplot2)
+library(readxl)
+library(corrplot)
+```
+
+
+```{r}
+#Dane dotyczące Ranczo
+title_seazon <- c()
+rating_seazon <- c()
+votes_seazon <- c()
+year_seazon <- c()
+
+for(i in 1:10){
+  seazons_filmweb <- read_html(paste0("https://www.filmweb.pl/serial/Ranczo-2006-262774/season/",i))
+  title <- seazons_filmweb %>% 
+    html_node(".filmHeaderSection__title") %>% 
+    html_text() %>% 
+    parse_number()
+  rating <- seazons_filmweb %>% 
+    html_node(".filmRating__rateValue") %>% 
+    html_text()
+  rating <- parse_number(str_replace_all(rating, ",", "."))
+  votes <- seazons_filmweb %>% 
+    html_node(".filmRating__count") %>% 
+    html_text() %>% 
+    parse_number()
+  year <- seazons_filmweb %>% 
+    html_node(".filmHeaderSection__year") %>% 
+    html_text() %>% 
+    parse_number()
+  title_seazon <- c(title_seazon, title)
+  rating_seazon <- c(rating_seazon, rating)
+  votes_seazon <- c(votes_seazon, votes)
+  year_seazon <- c(year_seazon, year)
+}
+
+seazons_wikipedia <- read_html("https://pl.wikipedia.org/wiki/Ranczo_(serial_telewizyjny)")
+
+seazons_table <- seazons_wikipedia %>% 
+  html_nodes("table") %>% 
+  html_table() %>% 
+  .[[4]]
+broadcast_hour <- parse_number(unlist(seazons_table[,6]))
+viewership <- parse_number(sub("\\[.*\\]", "", str_replace(unlist(seazons_table[,7]), ",", "\\.")))
+
+
+seazons <- data.frame(title_seazon,rating_seazon,votes_seazon,year_seazon,broadcast_hour,viewership)
+names(seazons) <- c("Seazon", "Rating", "Votes", "Year", "Broadcast", "Viewership")
+
+write.csv(seazons, file = "seazons.csv", row.names = T)
+
+seazons_cast <- seazons_wikipedia %>% 
+  html_nodes("table") %>% 
+  html_table()%>% 
+  .[[5]]
+colnames(seazons_cast) <- seazons_cast[2,]
+seazons_cast <- seazons_cast[-c(1,2),]
+seazons_cast <- seazons_cast[,-13]
+
+seazons_cast <- data.frame(
+  Aktor = seazons_cast$Aktor,
+  Postać = seazons_cast$Postać,
+  `Sezon 1 (2006)` = ifelse(seazons_cast$`Sezon 1 (2006)` == "", 0, 1),
+  `Sezon 2 (2007)` = ifelse(seazons_cast$`Sezon 2 (2007)` == "", 0, 1),
+  `Sezon 3 (2008)` = ifelse(seazons_cast$`Sezon 3 (2008)` == "", 0, 1),
+  `Sezon 4 (2009)` = ifelse(seazons_cast$`Sezon 4 (2009)` == "", 0, 1),
+  `Sezon 5 (2011)` = ifelse(seazons_cast$`Sezon 5 (2011)` == "", 0, 1),
+  `Sezon 6 (2012)` = ifelse(seazons_cast$`Sezon 6 (2012)` == "", 0, 1),
+  `Sezon 7 (2013)` = ifelse(seazons_cast$`Sezon 7 (2013)` == "", 0, 1),
+  `Sezon 8 (2014)` = ifelse(seazons_cast$`Sezon 8 (2014)` == "", 0, 1),
+  `Sezon 9 (2015)` = ifelse(seazons_cast$`Sezon 9 (2015)` == "", 0, 1),
+  `Sezon 10 (2016)` = ifelse(seazons_cast$`Sezon 10 (2016)` == "", 0, 1)
+)
+
+colnames(seazons_cast) = c("Actor", "Role", 1:10)
+seazons_cast$Role <- gsub(".*!", "",seazons_cast$Role)
+seazons_cast$Actor <- gsub(".*!", "",seazons_cast$Actor)
+
+dane <- read_excel("dane.xlsx")
+dane$Rating <- ifelse(dane$Rating==0.0, NA, dane$Rating)
+seazons_cast <- data.frame(seazons_cast, "Rating" = dane$Rating)
+
+write.csv(seazons_cast, file = "seazons_cast.csv", row.names = T)
+
+#Dane dotyczące odcinków Ranczo
+seazon_episode <- rep(1:10, each=13)
+number_episode <- 1:130
+
+title_episode <- c()
+rating_episode <- c()
+votes_episode <- c()
+duration_episode<- c()
+
+w <-  paste0("https://www.filmweb.pl/serial/Ranczo-2006-262774/episode/", seazon_episode,"/", number_episode)
+for(i in w){
+  episodes_filmweb <- read_html(i)
+  title <- episodes_filmweb %>% 
+      html_element("h1") %>% 
+      html_text()
+  rating <- episodes_filmweb %>% 
+      html_node(".filmRating__rateValue") %>% 
+      html_text()
+  rating <- parse_number(str_replace_all(rating, ",", "."))
+  votes <- episodes_filmweb %>% 
+      html_node(".filmRating__count") %>% 
+      html_text() %>% 
+      parse_number()
+  duration_e <- episodes_filmweb %>% 
+      html_node(".filmCoverSection__duration") %>% 
+      html_text() %>% 
+      parse_number()
+  
+  title_episode <- c(title_episode, title)
+  rating_episode <- c(rating_episode, rating)
+  votes_episode <- c(votes_episode, votes)
+  duration_episode<- c(duration_episode, duration_e)
+}
+
+w <- paste0("https://www.filmweb.pl/serial/Ranczo-2006-262774/episode/", seazon_episode,"/", number_episode,"/cast/actors")
+
+cast <- c()
+
+for(i in w){
+  cast_filmweb <- read_html(i)
+  
+  role <- cast_filmweb %>% 
+    html_node(".filmEpisodeFullCastSection__list") %>% 
+    html_elements("span") %>% 
+    html_text()
+  role <- paste(role[seq(1,length(role),3)], collapse =" | ")
+  
+  cast <- c(cast, role)
+}
+
+episodes <- data.frame(seazon_episode, number_episode, title_episode, rating_episode, votes_episode, duration_episode, cast)
+names(episodes) <- c("Seazon", "Number", "Title", "Rating", "Votes", "Duration", "Cast")
+write.csv(episodes, file = "episodes.csv", row.names = T)
+```
+
+```

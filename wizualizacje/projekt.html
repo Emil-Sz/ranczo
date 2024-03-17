@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Jakie czynniki wpływają na ocenę i oglądalność serialu na podstawie produkcji “Ranczo”?</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="projekt_files/libs/clipboard/clipboard.min.js"></script>
+<script src="projekt_files/libs/quarto-html/quarto.js"></script>
+<script src="projekt_files/libs/quarto-html/popper.min.js"></script>
+<script src="projekt_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="projekt_files/libs/quarto-html/anchor.min.js"></script>
+<link href="projekt_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="projekt_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="projekt_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="projekt_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="projekt_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+<script src="projekt_files/libs/htmlwidgets-1.6.2/htmlwidgets.js"></script>
+<link href="projekt_files/libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
+<script src="projekt_files/libs/datatables-binding-0.31/datatables.js"></script>
+<script src="projekt_files/libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="projekt_files/libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="projekt_files/libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
+<script src="projekt_files/libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script>
+<link href="projekt_files/libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+<script src="projekt_files/libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+<script src="projekt_files/libs/plotly-binding-4.10.3/plotly.js"></script>
+<script src="projekt_files/libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="projekt_files/libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+<script src="projekt_files/libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Jakie czynniki wpływają na ocenę i oglądalność serialu na podstawie produkcji “Ranczo”?</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<div class="cell">
+
+</div>
+<div class="cell">
+
+</div>
+<style>
+body {
+  font-size: 20px;
+  color: #222831;
+  font-family: Verdana;
+  font-size: 20px;
+  background: linear-gradient(90deg, rgba(0,173,181,1) 0%, rgba(0,173,181,1) 5%, rgba(255,255,255,1) 5%, rgba(255,255,255,1) 95%, rgba(0,173,181,1) 95%, rgba(0,173,181,1) 100%);
+}
+
+.title {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  word-spacing: 5px;
+  text-shadow: 2px 2px 0px #00ADB5;
+  font-size: 33px;
+  font-weight: 550;
+}
+
+main{
+    padding-top: 50px;
+}
+
+.logo {
+  width: 300px;
+  margin: 100px auto;
+}
+
+.opis {
+  width: 100%;
+  text-align: right;
+}
+
+.autor {
+  margin-bottom: 100px;
+}
+
+.podtytul {
+  color: #00ADB5;
+  font-weight: bold;
+  letter-spacing: 2px;
+  word-spacing: 7px;
+  text-transform: uppercase;
+  border: none;
+}
+
+.fragment{
+  margin 30px 0 15px 0;
+  color: #00ADB5;
+  font-weight: bold;
+  letter-spacing: 1px;
+  word-spacing: 3px;
+}
+
+.wyroznik {
+  font-family: 'Monospace';
+  letter-spacing: 1px;
+  color: #00ADB5;
+  font-weight: bold;
+}
+
+a{
+  color: #00ADB5;
+}
+
+hr{
+    overflow: visible;
+    padding: 0;
+    border: none;
+    border-top: 3px double #00ADB5;
+    color: #00ADB5;
+    text-align: center;
+}
+hr:after {
+    content: "§";
+    display: inline-block;
+    position: relative;
+    top: -0.9em;
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    color: #00ADB5;
+}
+
+img{
+  display:block;
+  width:100%;
+}
+
+.content, p{
+  margin: 0;
+}
+
+
+</style>
+<img src="logo.png" class="logo">
+
+<p class="opis">Metody Pozyskiwania i Wizualizacji Danych</p>
+
+<p class="opis autor">Przygotował: Emil Szewczak</p>
+
+<h2 class="podtytul anchored">Wstęp</h2>
+<p>Dynamiczny rozwój przemysłu rozrywkowo-telewizyjnego sprawił, że analiza czynników wpływających na ocenę i oglądalność seriali stała się obszarem szczególnie interesującym dla badaczy. W kontekście polskiej sceny telewizyjnej jednym z fenomenów, który zyskał szczególną popularność i uznanie, jest serial “Ranczo”. Jego trwała obecność w świadomości widzów i kultowy status stawiają go w centrum uwagi, jako obiekt dogłębnej analizy.</p>
+<p>Celem niniejszego projektu jest dokładne zbadanie czynników, które przyczyniają się do sukcesów i porażek “Rancza” w kontekście oceny widzów i poziomu oglądalności. Wartościowe wnioski z takiej analizy mogą nie tylko zaspokoić ciekawość badaczy, ale również dostarczyć praktycznych wskazówek dla twórców i producentów serialu oraz innych podmiotów zainteresowanych kreowaniem atrakcyjnych treści telewizyjnych.</p>
+<h3 class="fragment anchored">Dane wykorzystane do analizy</h3>
+<p>Dane, które wykorzystałem do analizy, udało mi się zescrapować ze stron <a href="https://www.filmweb.pl/serial/Ranczo-2006-262774">Flimweb</a> oraz <a href="https://pl.wikipedia.org/wiki/Ranczo_(serial_telewizyjny)">Wikipedia</a>.</p>
+<p>Udało mi się utworzyć 3 ramki danych:</p>
+<ul>
+<li>
+<span class="wyroznik">seazons</span> - 10 obserwacji 6 zmiennych,
+</li>
+<li>
+<span class="wyroznik">seazons_cast</span> - 74 obserwacji 13 zmiennych,
+</li>
+<li>
+<span class="wyroznik">episodes</span> - 130 obserwacji 7 zmiennych.
+</li>
+</ul>
+<p>Do pobrania danych wykorzystałem bibliotekę dostępną w R o nazwie <span class="wyroznik">rvest</span>.</p>
+<h3 class="fragment anchored">Seazons</h3>
+<p>Ta ramka danych zawiera informacje o sezonach serialu. Konkretnie zawiera kolumny:</p>
+<ul>
+<li>
+<span class="wyroznik">Seazon</span> - numer sezonu,
+</li>
+<li>
+<span class="wyroznik">Rating</span> - średnia ocena sezonu z serwisu <a href="https://www.filmweb.pl/serial/Ranczo-2006-262774">Flimweb</a>,
+</li>
+<li>
+<span class="wyroznik">Votes</span> - liczba głosów, które wpłynęły na ocenę,
+</li>
+<li>
+<span class="wyroznik">Year</span> - rok wydania,
+</li>
+<li>
+<span class="wyroznik">Broadcast</span> - godzina premiery telewizyjnej (każdy odcinek w sezonie był transmitowany o tej samej godzinie, każdy odcinek miał premierę w niedziele),
+</li>
+<li>
+<span class="wyroznik">Viewership</span> - średnia oglądalność odcinków w sezonie na antenie TVP1 w chwili premiery z serwisu <a href="https://pl.wikipedia.org/wiki/Ranczo_(serial_telewizyjny)">Wikipedia</a>.
+</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-2b4f6aba0ef23861391b" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-2b4f6aba0ef23861391b">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10"],[1,2,3,4,5,6,7,8,9,10],[8.4,8.5,8.699999999999999,8.699999999999999,8.1,7.9,8,7.9,7.6,7.7],[440,392,376,359,318,309,302,299,294,305],[2006,2007,2008,2009,2011,2012,2013,2014,2015,2016],[20.15,20.15,20.15,20.15,20.25,20.25,20.25,20.25,20.25,20.25],[4.72,6.86,6.9,8.279999999999999,6.65,6.17,6.22,6.15,6,5.3]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Seazon<\/th>\n      <th>Rating<\/th>\n      <th>Votes<\/th>\n      <th>Year<\/th>\n      <th>Broadcast<\/th>\n      <th>Viewership<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,3,4,5,6]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Seazon","targets":1},{"name":"Rating","targets":2},{"name":"Votes","targets":3},{"name":"Year","targets":4},{"name":"Broadcast","targets":5},{"name":"Viewership","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<h3 class="fragment anchored">Seazons_cast</h3>
+<p>Ta ramka danych zawiera informacje o obsadzie serialu oraz rolach w jakie wcielili się aktorzy w danym sezonie. Konkretnie zawiera kolumny:</p>
+<ul>
+<li>
+<span class="wyroznik">Actor</span> - imię i nazwisko aktora,
+</li>
+<li>
+<span class="wyroznik">Role</span> - nazwa postaci, w którą wciela się dany aktor,
+</li>
+<li>
+<span class="wyroznik">Rating</span> - średnia ocena postaci z serwisu <a href="https://www.filmweb.pl/serial/Ranczo-2006-262774">Flimweb</a>,
+</li>
+<li>
+oraz kolumny ponumerowane od <span class="wyroznik">X1</span> do <span class="wyroznik">X10</span> (nazwy odpowiadają numerom sezonów) z wartościami <span class="wyroznik">1</span> lub <span class="wyroznik">0</span> (1 - postać występowała w tym sezonie, 0 - postać nie występowała w danym sezonie).
+</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-7c62291a0de6bd357a16" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-7c62291a0de6bd357a16">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74"],["Ilona Ostrowska","Cezary Żak","Cezary Żak","Paweł Królikowski","Jeff Butcher","Grzegorz Wons","Leon Niemczyk","Bogdan Kalus","Piotr Pręgowski","Dorota Chotecka-Pazura","Violetta Arlak","Magdalena Waligórska-Lisiecka","Arkadiusz Nader","Grażyna Zielińska","Marta Chodorowska","Ewa Kuryło","Sylwester Maciejewski","Marta Lipińska","Jędrzej Cempura","Katarzyna Żak","Jacek Kawalec","Beata Olga Kowalska","Dorota Nowakowska","Maciej Cempura","Anna Stępień","Artur Barciś","Wojciech Wysocki","Magdalena Kuta","Franciszek Pieczka","Piotr Ligienza","Wiktor Zborowski","Przemysław Sadowski","Elżbieta Romanowska","Sylwia Gliwa","Nam Kyun Kim","Bartłomiej Kasprzykowski","Eugenia Herman","Tomasz Sapryk","Aleksander Mikołajczak","Aleksander Mikołajczak","Weronika Kunka","Wiktoria Kunka","Marek Lewandowski","Tadeusz Hanusek","Leon Charewicz","Patricia Kazadi","Dorota Segda","Agnieszka Pawełkiewicz","Anna Iberszer","Mariusz Ostrowski","Jan Kulczycki","Joanna Lissner","Sławomir Orzechowski","Iwona Rulewicz","Marta Mazurek","Anna Wojton","Szymon Nygard","Waldemar Czyszak","Waldemar Czyszak","Waldemar Czyszak","Mateusz Rusin","Marta Dąbrowska","Lidia Sadowa","Lidia Sadowa","Emilia Komarnicka","Bartłomiej Magdziarz","Maciej Marczewski","Robert Majewski","Justyna Gugała","Justyna Gugała","Dobromir Dymecki","Kacper Matula","Wiesław Komasa","Mikołaj Krawczyk"],["Lucy Wilska","ks. bp Piotr Kozioł","Paweł Kozioł","Jakub „Kusy” Sokołowski","Jerry Smith","Andrzej Więcławski","Jan Japycz","Tadeusz Hadziuk","Patryk Pietrek","Krystyna Więcławska","Halina Kozioł","Violetta Kotecka","Stanisław Kotecki","Zofia („babka”)","Klaudia Kozioł","Wiesława Oleś","Maciej Solejuk","„Michałowa” Japycz","Marianek Solejuk","Kazimiera Solejuk","Tomasz Witebski","Dorota Wezół","Celina Hadziuk","Szymek Solejuk","Kasia Solejuk","Arkadiusz Czerepach","Mieczysław Wezół","Leokadia Czerepach (wcześniej Paciorek)","Stanisław Japycz","Fabian Duda","ks. bp Wacław Sądecki","Arkadiusz Stolarkiewicz / Jan Kowalski","Jolanta Pietrek","Weronika Więcławska-Tao","Kao Tao","ks. Robert","ciotka księdza i wójta","Waldemar Myćko","Bieżun","kierowca taksówki","Dorotka","Dorotka","Bartkowiak","Kusiba","Ryszard Polakowski","Jagna Nowak","Grażyna","Kinga","Francesca Andreani-Witebska","Antonio","Ignaczak","matka Zosi","Grzegorz Wargacz","Wargaczowa","Julia Wargaczówna","Jadwiga Myćko","Konrad","Pakuła","Hryćko","chłop","ks. Maciej","Zosia","dziennikarka","Ola Kowalska","Monika Korczab","Łukasz","Maciej Zieliński","Jędrzej Kowalski","klientka apteki","Weronka","Paweł","Wojciech Ostecki","Marek Karat","Jakub"],[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,0,0,1,0,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,1,1,1,1,1,1,0,1,0,0,0,0,1,1,0,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1,1,0,1,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0],[1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,0,0,0,0,1,0,0,1,1,0,1,1,1,0,1,1,0,0,1,1,0,0,0,0,0,0,0,1,1,0,0,1,1,1,1,0,0,0,0,0,0],[1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,0,0,1,0,1,0,0,1,1,0,1,1,1,0,1,1,0,0,0,1,1,0,0,0,0,0,0,1,0,0,0,1,0,0,1,1,0,1,0,0,0],[1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,0,0,1,0,1,0,0,1,1,0,1,1,0,0,1,1,0,0,0,1,0,0,0,0,0,0,0,1,0,0,1,1,0,0,1,0,1,1,1,1,1],[1,1,1,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,0,0,1,0,1,0,0,1,1,0,1,1,0,1,1,1,0,0,0,1,0,0,0,0,0,0,0,1,0,0,1,1,0,0,1,0,1,0,1,1,1],[8,9.199999999999999,9.199999999999999,8.1,null,7.6,8.1,8.199999999999999,8.300000000000001,7.8,8.1,7.6,7.9,7.7,7.8,6.6,8.5,8.800000000000001,6.3,8.6,8,7.4,7.6,6.3,6.1,9,8,8,8.699999999999999,7.4,null,null,6.9,null,null,7.4,null,7.6,null,null,5.4,5.1,null,null,7,5.7,null,6.8,7.4,null,null,null,7.4,7.4,null,6.2,null,null,null,null,7.9,5.9,null,4,7.3,5.7,null,null,null,null,5.3,null,null,4]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Actor<\/th>\n      <th>Role<\/th>\n      <th>X1<\/th>\n      <th>X2<\/th>\n      <th>X3<\/th>\n      <th>X4<\/th>\n      <th>X5<\/th>\n      <th>X6<\/th>\n      <th>X7<\/th>\n      <th>X8<\/th>\n      <th>X9<\/th>\n      <th>X10<\/th>\n      <th>Rating<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[3,4,5,6,7,8,9,10,11,12,13]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Actor","targets":1},{"name":"Role","targets":2},{"name":"X1","targets":3},{"name":"X2","targets":4},{"name":"X3","targets":5},{"name":"X4","targets":6},{"name":"X5","targets":7},{"name":"X6","targets":8},{"name":"X7","targets":9},{"name":"X8","targets":10},{"name":"X9","targets":11},{"name":"X10","targets":12},{"name":"Rating","targets":13}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<h3 class="fragment anchored">Episodes</h3>
+<p>Ta ramka danych zawiera informacje o odcinkach serialu. Konkretnie zawiera kolumny:</p>
+<ul>
+<li>
+<span class="wyroznik">Seazon</span> - numer sezonu,
+</li>
+<li>
+<span class="wyroznik">Number</span> - numer odcinka,
+</li>
+<li>
+<span class="wyroznik">Title</span> - tytuł odcinka,
+</li>
+<li>
+<span class="wyroznik">Rating</span> - średnia ocena odcinka z serwisu <a href="https://www.filmweb.pl/serial/Ranczo-2006-262774">Flimweb</a>,
+</li>
+<li>
+<span class="wyroznik">Votes</span> - liczba głosów, które wpłynęły na średnią ocenę konkretnego odcinka,
+</li>
+<li>
+<span class="wyroznik">Duration</span> - czas trwania odcinka (wyrażony w minutach),
+</li>
+<li>
+<span class="wyroznik">Cast</span> - postacie występujące w danych odcinkach (oddzielone znakiem “<span class="wyroznik">|</span>”)
+</li>
+</ul>
+<div class="cell">
+<div class="cell-output-display">
+
+<div class="datatables html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-ef5b886439cf8deeb688" style="width:100%;height:auto;"></div>
+<script type="application/json" data-for="htmlwidget-ef5b886439cf8deeb688">{"x":{"filter":"none","vertical":false,"data":[["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50","51","52","53","54","55","56","57","58","59","60","61","62","63","64","65","66","67","68","69","70","71","72","73","74","75","76","77","78","79","80","81","82","83","84","85","86","87","88","89","90","91","92","93","94","95","96","97","98","99","100","101","102","103","104","105","106","107","108","109","110","111","112","113","114","115","116","117","118","119","120","121","122","123","124","125","126","127","128","129","130"],[1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,4,4,4,4,4,4,4,4,4,4,4,4,4,5,5,5,5,5,5,5,5,5,5,5,5,5,6,6,6,6,6,6,6,6,6,6,6,6,6,7,7,7,7,7,7,7,7,7,7,7,7,7,8,8,8,8,8,8,8,8,8,8,8,8,8,9,9,9,9,9,9,9,9,9,9,9,9,9,10,10,10,10,10,10,10,10,10,10,10,10,10],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130],["Spadek","Goście z zaświatów","Ksiądz z inicjatywą","Otrzeźwienie","Wieść gminna","Racja gminy","Podwójny agent","Kozy ofiarne","Odwyk i antykoncepcja","Porwanie","Wspólny wróg","Honor gminy","Wielkie wybory","Sztuka i władza","Gmina to Ja","Lokalna rewolucja","Honor parafii","Europejski kandydat","Rozwód z miłości","Diabelskie porachunki","Jesienna burza","Diler pierogów","Do dobrego lepiej przymusić","Siła władzy","Plan awaryjny","Zgoda po polsku","Płomień duży i mały","Powrót demona","W kleszczach terroru","Fakt prasowy","Radio interaktywne","Wielkie odkrycie","Sprawca","Odsiecz","Upadek obyczajów","Miedź brzęcząca","Zrozumieć kobietę","Złoty deszcz","Szczęśliwe rozwiązanie","Szok poporodowy","Sztormy emocjonalne","Śluby i rozstania","Agent","Polityka i czary","Wymiana międzypokoleniowa","Dzieci śmieci","W samo popołudnie","Bohaterski strajk","Debata","Kontratak","Fałszerze uczuć","Zemsta i wybaczenie","Msza obywatelska","Czysty biznes","Wielki powrót","Amerykańska baza","Człowiek z Rio","Obcy Krajowcy","Doktor Wezół","Włoski rozłącznik","Honor i zęby trzonowe","Przymus rekreacji","Przewroty kopernikańskie","Nad Solejuków i Wargaczów domem","Pakt z czartem","Szlifierze diamentów","Kozi róg","Narracja negacji","Wiatr w żaglach","Seks nocy letniej","Dzieci rewolucji","Przeciek kontrolowany","Świadek koronny","Sztuka translacji","Kontrrewolucja","Tchnienie Las Vegas","Przywódce","Poród amatorski","Wielbicielka z Warszawy","Potęga immunitetu","Podróż w czasie","Tchnienie antyklerykalizmu","Model życia artysty","Słowo senatora","Pojedynek czarownic","Droga na szczyt","Ciężka ręka prawa","Koniec świata w Wilkowyjach","Czas konspiry","Trudne powroty","Droga przez stos","Radio Mamrot","Wykapany ojciec","Wybacz mnie","Czysta karta","Obywatelskie obowiązki","Nowatorska terapia","Zbrodnia to niesłychana, pani zabija pana","Los pogorzelca","W blasku fleszy","Grecy i Bułgarzy","Jedźmy, nikt nie woła","Nie rzucaj ziemi, skąd twój ród","Wielkie otwarcie","Nowe wyzwania","Bardzo krótkie kariery","W szponach zdrowia","Gambit geniusza","Potęga mediów","Boska cząstka","Istotny dysonans","Demony Kusego","Konie trojańskie","Zamrożony kapitał","Brzytwa dla tonącego","Grzechy miłości","Złoty róg","Kto tu rządzi","Partyzancka dola","Próba ognia","Geny nie kłamią","Wszystko jest teatrem","Depresja biskupa","Wet za wet","Polityczny zombie","Edukacyjne dylematy","Dominator","Klauzula sumienia","Ochotnicza straż kobiet","Cuda, cuda ogłaszają"],[8.5,8.6,8.6,8.5,8.5,8.5,8.6,8.5,8.6,8.6,8.5,8.6,8.800000000000001,8.6,8.5,8.6,8.6,8.6,8.5,8.5,8.6,8.699999999999999,8.5,8.6,8.699999999999999,8.800000000000001,8.5,8.699999999999999,8.699999999999999,8.699999999999999,8.699999999999999,8.6,8.6,8.6,8.6,8.6,8.6,8.6,8.800000000000001,8.5,8.6,8.699999999999999,8.6,8.6,8.6,8.6,9.199999999999999,8.6,8.800000000000001,8.699999999999999,8.6,8.9,8.199999999999999,8.300000000000001,8.300000000000001,8.4,8.4,8.5,8.5,8.4,8.4,8.4,8.5,8.4,8.6,8.4,8.300000000000001,8.5,8.4,8.300000000000001,8.199999999999999,8.199999999999999,8.199999999999999,8.5,8.300000000000001,8.300000000000001,8.4,8.4,8.1,8.300000000000001,8.199999999999999,8.300000000000001,8.199999999999999,8.199999999999999,8.199999999999999,8.199999999999999,8.199999999999999,8.800000000000001,8.800000000000001,8.4,8.4,8,8.1,8.1,8.1,8.1,8.4,8.5,8,8,8.199999999999999,8.1,8.5,8.300000000000001,7.7,7.3,6.8,6.6,7.7,7.7,7.8,7.6,7.8,7.9,8,7.9,8.1,7.7,7.6,7.8,7.7,7.6,7.6,7.9,7.9,7.7,7.8,7.8,7.9,8.4],[837,734,684,668,658,640,644,641,641,651,629,635,630,576,560,557,558,541,554,547,538,558,534,534,529,537,516,512,510,502,513,497,492,499,501,502,494,491,514,515,497,503,492,492,486,482,720,488,505,495,491,542,521,500,487,491,482,482,509,467,466,462,459,478,467,474,464,457,449,448,444,429,439,432,423,418,412,411,446,435,425,425,425,416,425,405,416,470,455,424,409,416,391,375,375,365,374,388,363,364,352,348,376,345,300,291,308,313,256,256,254,250,246,242,242,248,255,230,210,208,202,195,199,198,203,197,185,188,193,226],[49,49,48,48,49,50,49,49,48,49,48,48,49,53,48,48,48,48,48,47,48,48,48,48,48,47,46,48,47,47,47,47,47,47,47,48,47,47,47,49,47,48,46,47,49,48,48,48,48,48,48,49,44,45,46,45,45,45,46,46,46,46,46,46,45,44,44,44,43,43,43,43,43,43,42,43,43,43,43,44,45,44,44,44,44,43,44,43,43,45,44,44,43,43,44,45,44,44,44,44,44,44,43,43,43,44,44,44,44,44,43,44,44,43,44,44,44,44,44,43,43,43,44,43,44,43,43,43,43,47]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>Seazon<\/th>\n      <th>Number<\/th>\n      <th>Title<\/th>\n      <th>Rating<\/th>\n      <th>Votes<\/th>\n      <th>Duration<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[1,2,4,5,6]},{"orderable":false,"targets":0},{"name":" ","targets":0},{"name":"Seazon","targets":1},{"name":"Number","targets":2},{"name":"Title","targets":3},{"name":"Rating","targets":4},{"name":"Votes","targets":5},{"name":"Duration","targets":6}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<h2 class="podtytul anchored">Analiza danych dot. sezonów</h2>
+<p>Poniższy wykres przedstawia średnie oceny (na 10) oraz oglądalność (w mln) poszczególnych sezonów produkcji.</p>
+<p><br></p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="plotly html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-26ed92f110ce21c0d433" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-26ed92f110ce21c0d433">{"x":{"visdat":{"441076507460":["function () ","plotlyVisDat"]},"cur_data":"441076507460","attrs":{"441076507460":{"x":{},"y":{},"marker":{"color":"#00171F"},"name":"Ocena","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"},"441076507460.1":{"x":{},"y":{},"marker":{"color":"#003459"},"name":"Oglądalność","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar","inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Wykres 1. Oceny i oglądalność","xaxis":{"domain":[0,1],"automargin":true,"title":"Sezon","tickvals":[1,2,3,4,5,6,7,8,9,10],"ticktext":["1","2","3","4","5","6","7","8","9","10"]},"yaxis":{"domain":[0,1],"automargin":true,"title":"Ocena (na 10) | Oglądalność (mln)","overlaying":"y"},"legend":{"x":0,"y":1},"barmode":"group","hovermode":"closest","showlegend":true},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[1,2,3,4,5,6,7,8,9,10],"y":[8.4000000000000004,8.5,8.6999999999999993,8.6999999999999993,8.0999999999999996,7.9000000000000004,8,7.9000000000000004,7.5999999999999996,7.7000000000000002],"marker":{"color":"#00171F","line":{"color":"rgba(31,119,180,1)"}},"name":"Ocena","type":"bar","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null},{"x":[1,2,3,4,5,6,7,8,9,10],"y":[4.7199999999999998,6.8600000000000003,6.9000000000000004,8.2799999999999994,6.6500000000000004,6.1699999999999999,6.2199999999999998,6.1500000000000004,6,5.2999999999999998],"marker":{"color":"#003459","line":{"color":"rgba(255,127,14,1)"}},"name":"Oglądalność","type":"bar","error_y":{"color":"rgba(255,127,14,1)"},"error_x":{"color":"rgba(255,127,14,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<p><br></p>
+<p>Można z niego odczytać, że pierwsze 4 sezony plasują się w topce średnich ocen i odstają od pozostałych o kilka dziesiątych. Najniżej ocenianym sezonem jest sezon 9, a najwyżej sezony 3 i 4. Zwróćmy uwagę jeszcze na oglądalność. Najwyższą oglądalność miał sezon 4, lecz widać tendencję wzrostową od 1 do 4 części serialu. Z każdy z kolejnych cykli serialu miał już coraz mniejszą oglądalność, najniższą sezon 10.</p>
+<p>Warto zauważyć, że sezon pierwszy mimo niskiej oglądalności, ma dość wysokie oceny. Wynika to z tego, że ludzie rzadko zaczynają nowe produkcje na antenie TV. Gdy jednak serial był już dostępny na platformach streamingowych, dotarł on do większej ilości odbiorców (pewnie przez metodę poleceń). Jako że cieszy się dobrymi ocenami nie będę analizował niskiej oglądalności sezonu 1.</p>
+<h3 class="fragment anchored">Skąd wzrost oceny pomiędzy drugim a trzecim sezonem?</h3>
+<p>Przeprowadzę analizę porównawczą drugiej i trzeciej części, czego celem będzie znalezienie przyczyn wyższych ocen cyklu trzeciego względem drugiego.</p>
+<p>Zacznijmy od tego, że pierwsze 4 sezony były wydawane w odstępach co rok. Każda część składa się z 13 odcinków. Wszystkie odcinki z 4 pierwszych sezonów zostały transmitowane w niedziele o godzinie 20:15. W tych cyklach występowało średnio 32 bohaterów.</p>
+<div class="cell">
+
+</div>
+<p>Sezony 2 i 3 nie różniły się wielką ilością danych, lecz udało mi się znaleźć dwie znaczące różnice.</p>
+<hr>
+<p>Poniższy wykres przedstawia średni czas trwania odcinka w sezonach 2 i 3.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="projekt_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Jak widać, nie zmalała ona o dużo (dokładnie o 1 minutę), ale być może właśnie to wpłynęło na lepsze oceny cyklu trzeciego. Im krócej trwają odcinki, tym mniej czasu poświęcamy na ich oglądanie, więc nie wydają się one nudne.</p>
+<hr>
+<p>Poniższy wykres przedstawia osoby, które dołączyły do produkcji w 3 sezonie i osoby, które z niej odeszły po 2 części oraz ocenę ich postaci. Jest także zaznaczona średnia ocena każdej postaci (wynosi ona około: <span class="wyroznik">7.3</span>)</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="projekt_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Mimo odejścia z “Rancza” bohatera “Jan Japycz”, który był oceniany najlepiej z przedstawionych postaci, to właśnie pojawienie się 3 nowych osób, a wraz z nimi wątków pozytywnie odbiło się na ocenach serialu. Ważne także, że ci nowi bohaterowie (“Jolanta Pietrek” i “ksiądz Robert”) byli w miarę lubiani. Powrót postaci “Zofii (babki)”, która była jedną z bardziej popularnych i docenianych postaci przez masy, również miał wpływ na oceny. Niestety, śmierć aktora, który grał “Jana Japycza” (Leon Niemczyk), w 2006 roku wpłynęła na brak możliwości pojawienia się jego postaci w kolejnych sezonach.</p>
+<hr>
+<p>Poniższy wykres przedstawia liczbę głosów, z których składa się średnia ocena odcinka.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="projekt_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Widać tutaj, że sezony początkowe mają większą liczbę głosów. Może to także wpłynąć na ocenę sezonu 3, ponieważ ludzie decydują się na oglądanie dalej serialu, jeśli podobała im się poprzednia część. Zatem skoro cykl drugi miał więcej głosów, możemy stwierdził, że przyciągną on większą grupę odbiorców do sezonu 3.</p>
+<hr>
+<p>Podsumowując tą część analizy, mogę stwierdzić, że istnieje klika czynników, przez które sezon 3 ma lepsze oceny od drugiego. Oto one:</p>
+<ul>
+<li>
+Spadek średniej długości trwania odcinków,
+</li>
+<li>
+Pojawienie się nowych, docenianych bohaterów,
+</li>
+<li>
+Powrót postaci, która nie brała udziału w poprzedniej części, lecz jest dobrze znana i lubiana,
+</li>
+<li>
+Większe zaangażowanie w poprzedni sezon, przyciąga większą grupę odbiorców.
+</li>
+</ul>
+<hr>
+<h3 class="fragment anchored">Skąd wzrost oglądalności między trzecim a czwartym sezonem?</h3>
+<p>Między trzecią a czwartą częścią serialu “Ranczo” możemy zauważyć wzrost średniej oglądalności na antenie TV prawie o <span class="wyroznik">1.3 mln</span>. Na aż taką różnicę mogło wpłynąć klika czynników. Na pewno duży wpływ na to miał sukces trzeciego cyklu. Oba sezony są średnio oceniane na <span class="wyroznik">8.7</span>, co jest najwyższą oceną względem pozostałych części. Skoro sezon trzeci uzyskał najlepsze opinie, to odbiorcy byli ciekawi, co pojawi się w kolejnej części. Właśnie to może być jeden z powodów tak wysokiej oglądalności sezonu czwartego.</p>
+<p>Między tymi cyklami także nie ma zadziwiających różnic. Są one wydawane w stałych odstępach (tak jak poprzednie części co rok). Wszystkie odcinki zostały transmitowane w niedziele o godzinie 20:15. Udało mi się jednak znaleźć kilka mniejszych bądź większych różnic.</p>
+<hr>
+<p>Poniższy wykres przedstawia średni czas trwania odcinka w sezonach 3 i 4.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="projekt_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Między tymi sezonami można zauważyć wzrost średniej długości trwania odcinka (także o minutę). Być może to, że sezon 3 cieszy się dobrymi ocenami oraz jest popularnie uważany za jeden z lepszych sezonów, wpłynęło na chęć poświęcenia więcej czasu bohaterom, których znamy i lubimy. Warto też zaznaczyć, że nikt nie opuścił produkcji po 3 cyklu (wszystkie postacie możemy zobaczyć ponownie w kolejnej części).</p>
+<hr>
+<p>Poniższy wykres przedstawia bohaterów sezonu 4 oraz ich oceny. Narysowana jest także średnia ocen wszystkich postaci.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="projekt_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Jak widać na wykresie większość postaci części czwartej “Rancza” jest oceniana powyżej średniej ocen postaci. Są także osoby, które są dosyć nisko oceniane przez widownie. Są to:</p>
+<ul>
+<li>
+<span class="wyroznik">Jolanta Pietrek</span> - postać drugoplanowa
+</li>
+<li>
+<span class="wyroznik">Kasia Solejuk</span> - postać epizodyczna
+</li>
+<li>
+<span class="wyroznik">Marianek Solejuk</span> - postać epizodyczna
+</li>
+<li>
+<span class="wyroznik">Szymek Solejuk</span> - postać epizodyczna
+</li>
+<li>
+<span class="wyroznik">Wiesława Oleś</span> - postać epizodyczna
+</li>
+</ul>
+<p>Jak widać, żadna z głównych i pierwszoplanowych postaci nie była oceniana poniżej średniej. W takim razie możemy jasno stwierdzić, że widzom podobały się wątki oraz sytuacje, w które byli wplatani bohaterowie. Warto też zaznaczyć, że postacie epizodyczne i drugoplanowe niemal w każdej produkcji są niżej oceniane niż główna obsada. Pojawili się oni tylko na kilka minut na przełomie całego sezonu, więc ich obecność nie miała aż takiego wpływu na oglądalność serialu.</p>
+<hr>
+<p>Podsumowując tą część analizy, mogę stwierdzić, że jest klika powodów przez które sezon 4 ma wyższą oglądalność względem części trzeciej. Oto one:</p>
+<ul>
+<li>
+Sukces trzeciego cyklu (dobre oceny) przyciągnął większą grupę odbiorców docelowych,
+</li>
+<li>
+Utrzymanie znanych i lubianych bohaterów z poprzedniej części jest powodem, przez który nie trzeba wkładać wielkiego zaangażowania w poznanie postaci (wszystkich dobrze już znamy),
+</li>
+<li>
+Brak nowych, mniej lubianych postaci.,
+</li>
+<li>
+Zwiększenie długości odcinków po sukcesie poprzedniej części (widzowie chcą spędzać więcej czasu z ulubionymi postaciami).
+</li>
+</ul>
+<hr>
+<h3 class="fragment anchored">Skąd taki spadek w oglądalności i ocenach między czwartym a piątym cyklem?</h3>
+<p>Jak już wiemy, z poprzedniej części analizy cykl czwarty produkcji ma najwyższą oglądalność, ale także najwyższe oceny. Natomiast kolejna część ma już ocenę niższą o klika dziesiątych a oglądalność aż o <span class="wyroznik">1.6 mln</span>. Co wpłynęło na taki obrót sytuacji?</p>
+<hr>
+<p>Poniższy wykres przedstawia lata, w których były wydawane kolejne części produkcji, wraz z ocenami i oglądalnością, w konkretnych latach.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="projekt_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Jak widać na powyższym wykresie w 2010 roku nie było nowego sezonu serialu. Przerwa w produkcji mogła wpłynąć na spadek oglądalności i ocen w kolejnym sezonie.</p>
+<hr>
+<p>Poniższy wykres przedstawia w jaki sposób zmiana godziny transmisji odcinków serialu wpłynęła na oceny i oglądalność produkcji.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="projekt_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Jak widać na powyższym wykresie, sezony, które były transmitowane o godzinie <span class="wyroznik">20:15</span>, czyli 4 pierwsze części produkcji mają wyższe oceny od pozostałych. Mają też one większą średnią oglądalność.</p>
+<p>Zmiana godziny transmisji produkcji mogła wpłynąć na oglądalność i oceny. Być może taka zmiana kolidowała z innymi serialami i odbiorcy byli zmuszani dokonywać wyboru między “Ranczem” a innym serialem.</p>
+<hr>
+<p>Poniższy wykres przedstawia osoby, które dołączyły do produkcji w 5 sezonie oraz ocenę ich postaci. Jest także zaznaczona średnia ocena każdej postaci (wynosi ona około: <span class="wyroznik">7.3</span>)</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="projekt_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Mimo pojawienia się dziewięciu nowych postaci (są one głownie pierwszo i drugoplanowe), żaden ze znanych bohaterów nie odszedł z produkcji. Wprowadzenie tylu nowych postaci wymaga od widzów zaangażowania w poznanie tych bohaterów i przyzwyczajenie się do nich. Gdy sezon 4 był sukcesem należało się trzymać dobrej formy i nie wprowadzać aż tylu zmian.</p>
+<p>Jak widać ci nowi bohaterowie nie są zbyt lubiani przez widzów. Tylko 4 z dziewięciu postaci jest oceniana ponad średnią ocenę. Dlatego wprowadzenie tylu bohaterów, którzy mają niskie oceny nie jest dobre ze względu na oceny i oglądalność sezonu piątego.</p>
+<hr>
+<p>Poniższy wykres przedstawia średni czas trwania odcinka w sezonach 4 i 5.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="projekt_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Między tymi sezonami można zauważyć spadek średniej długości trwania odcinka (o 2 minuty). Mimo wprowadzenia tylu nowych postaci także zmniejszono czas trwania odcinków, co powoduje, że ciężko jest poznać i polubić te nowe postacie. Taki spadek w długości trwania odcinków mógł też wpłynąć na zwiększenie bloków reklamowych. Dłuższe reklamy także powodują frustrację u odbiorców, także stąd może wynikać spadek w oglądalności.</p>
+<hr>
+<p>Podsumowując tą część analizy, mogę stwierdzić, że istnieje klika czynników przez które sezon 5 ma gorsze oceny i oglądalność względem czwartej części. Oto one:</p>
+<ul>
+<li>
+Dwa lata przerwy między sezonem 4 a 5 (jedyna przerwa tej długości) spowodowała, że widzowie mogli zapomnieć o produkcji, przez co ciężej było im do niej wrócić,
+</li>
+<li>
+Zmiana godziny transmisji odcinków Rancza, przez co mogły one kolidować z innymi produkcjami (widzowie musieli dokonać wyboru, który serial obejrzeć),
+</li>
+<li>
+Wprowadzenie wielu nowych postaci (utrata klimatu poprzedniej części, która była najlepiej oceniana i miała największą oglądalność),
+</li>
+<li>
+Skrócenie długości trwania odcinków, przez co ciężko było poznać i polubić nowe postacie,
+</li>
+<li>
+Zwiększenie długości bloków reklamowych, co powoduje frustracje u odbiorców i chęć zmiany kanału telewizyjnego.
+</li>
+</ul>
+<h3 class="fragment anchored"> Dlaczego ostatnie sezony są oceniane najgorzej i mają najmniejszą oglądalność? </h3>
+<p>Jak widać na wykresie 1 (Oceny i oglądalność sezonów) oraz na wykresie 7 (Oceny i oglądalność w latach) im późniejszy sezon, tym mniejsze oceny i oglądalność.</p>
+<p>Jak widać na wykresie 8 (Godzina transmisji) została zmieniona godzina emisji odcinków od sezonu piątgo na <span class="wyroznik">20:25</span>. O efektach takiej zmiany wspominałem wcześniej.</p>
+<p>Może to wynikać z tego, że produkcja “Ranczo” ma specyficzną fabułę. Opowiada ona o zmianach wsi ze względu na czynniki zewnętrzne. Być może wraz ze zmianą czasów taka fabuła stała się nierealna, zatrzymana w czasie, przez co mniej atrakcyjna dla odbiorców. Serial miał aż 10 sezonów, jest to dosyć dużo jak na Polską produkcję, lecz właśnie taka długość mogła powodować zmęczenie takim samym formatem i wątkami.</p>
+<p>Dodatkowo w późniejszych sezonach zmienił się klimat produkcji. Zmienili się bohaterowie, wątki a także fabuła, więc produkcja straciła klimat z pierwszych części.</p>
+<hr>
+<p>Poniższy wykres przedstawia 10 najgorzej ocenianych postaci wraz z podpisem, w którym sezonie pojawili się po raz pierwszy.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="projekt_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Jak widać na powyższym wykresie najgorzej oceniane postacie głównie pojawiły się pierwszy raz w sezonach 5-9 (z wyjątkiem <span class="wyroznik">Kasii Solejuk</span>, która jest postacią epizodyczną od pierwszego sezonu). Przez wprowadzenie wielu nowych postaci serial stracił swój klimat z poprzednich części. Wprowadzone postacie także były postrzegane przez odbiorców jako mniej lubiane, gorsze od innych postaci, co wpłynęło na gorszą oglądalność i oceny ostatnich sezonów.</p>
+<hr>
+<p>Poniższy wykres przedstawia średni czas trwania odcinka w sezonach od 4 do 10.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="projekt_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Między tymi sezonami można zauważyć spadek średniej długości trwania odcinka. O efektach zmniejszonego czasu odcinka pisałem już kilka razy. To samo dotyczy się tego wykresu.</p>
+<hr>
+<p>Z każdym sezonem te czynniki coraz bardziej wpływały na gorsze oceny i oglądalność.</p>
+<hr>
+<h2 class="podtytul anchored"> Najlepsze i najgorsze odcinki </h2>
+<p>Poniższy wykres przedstawia 5 najlepiej i 5 najgorzej ocenianych odcinków, wraz z zaznaczoną średnią oceną wszystkich odcinków (wynosi ona około <span class="wyroznik">8.3</span>).</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="projekt_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Jak widać na wykresie najgorsze odcinki są z 2 ostatnich sezonów, a najlepsze są w pierwszych czterech częściach produkcji. Potwierdzają to oceny poszczególnych sezonów (początkowe sezony są lepiej oceniane niż końcowe).</p>
+<hr>
+<p>Poniższy wykres przedstawia 5 najkrótszych i 5 najdłuższych odcinków, wraz z zaznaczoną średnią długością trwania odcinka (wynosi ona około <span class="wyroznik">45</span> minut). Ma także podpisaną ocenę każdego odcinka.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="projekt_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Jak widać na powyższym wykresie odcinki, które trwają najkrócej (są z sezonu 6) są także niżej oceniane. Odcinki które trwają dłużej, maja lepsze oceny i są one głównie z sezonu 1 i 2. Potwierdza to także wniosek, że dłuższe odcinki są lepiej oceniane od krótszych.</p>
+<hr>
+<p>Poniższy wykres przedstawia 5 odcinków z najmniejszą i największą liczbą głosów, które wpływają na średnią, wraz z zaznaczoną średnią liczbą głosów (wynosi ona około <span class="wyroznik">443</span> głosy). Ma także podpisaną ocenę każdego odcinka.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="projekt_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Jak widać na powyższym wykresie odcinki z większą liczbą głosów mają lepsze oceny niż odcinki z małą liczbą głosów. Dodatkowo najwięcej głosów mają odcinki z sezonu 1 i 4 (bardzo dobrze oceniane sezony), a najmniej z sezonu 10 (jeden z gorzej ocenianych sezonów). Sezon 10 ma też najniższą oglądalność, więc z tego może wynikać niska liczba ocen.</p>
+<hr>
+<h2 class="podtytul anchored"> Podsumowanie </h2>
+<p>Analiza sezonu 4 wskazuje na kilka kluczowych czynników, które przyczyniły się do jego sukcesu w porównaniu z sezonem 3. Przyciągnęło to większą grupę odbiorców docelowych, głównie dzięki sukcesowi poprzedniego cyklu, dobrym ocenom oraz utrzymaniu znanych i lubianych postaci. Warto zauważyć, że zwiększenie długości odcinków po sukcesie poprzedniej części pozwoliło widzom spędzać więcej czasu z ulubionymi bohaterami.</p>
+<p>Natomiast analiza sezonu 3 sugeruje, że kilka czynników przyczyniło się do lepszych ocen w porównaniu z sezonem 2. Spadek średniej długości trwania odcinków, pojawienie się nowych, docenianych postaci, powrót dobrze znanej postaci z poprzednich sezonów oraz większe zaangażowanie w poprzednią serię przyciągnęły większą grupę odbiorców.</p>
+<p>Niestety, sezon 5 zanotował spadek oglądalności i ocen w porównaniu z sezonem 4. Przerwa dwóch lat między sezonami, zmiana godziny transmisji, wprowadzenie wielu nowych postaci, skrócenie długości trwania odcinków i zwiększenie długości bloków reklamowych przyczyniły się do tego spadku. Widzowie mogli zapomnieć o produkcji, a zmiany w formule serialu mogły wpłynąć negatywnie na jego klimat i atrakcyjność.</p>
+<h3 class="fragment anchored"> Co powinni zrobić twórcy, aby poprawić oceny i oglądalność serii? </h3>
+<ol type="1">
+<li><p><strong>Kontynuacja sukcesów poprzednich sezonów:</strong></p>
+<ul>
+<li><p>Analiza sezonu 4 wskazuje na sukces wynikający z dobrych ocen poprzednich cykli. Warto zatem skoncentrować się na zachowaniu elementów, które przyciągnęły pozytywne opinie widzów, takich jak solidny scenariusz, dobrze skonstruowane postacie i ciekawa fabuła.</p></li>
+<li><p>Kontynuacja wątków, które zdobyły popularność w poprzednich sezonach, może zbudować kontynuację zainteresowania widzów.</p></li>
+</ul></li>
+<li><p><strong>Zachowanie ulubionych postaci:</strong></p>
+<ul>
+<li>Znane i lubiane postacie są jednym z kluczowych elementów przyciągających widzów. Staranność w utrzymaniu równowagi między znanymi postaciami a wprowadzeniem nowych, fascynujących postaci, może przynieść korzyści, zachowując jednocześnie tożsamość serialu.</li>
+</ul></li>
+<li><p><strong>Regularność i komunikacja:</strong></p>
+<ul>
+<li>Unikanie długich przerw między sezonami może być kluczowe dla utrzymania zainteresowania widzów. Komunikacja z fanami poprzez media społecznościowe, zapowiedzi, za kulisami, czy relacje z planu, może utrzymać aktywność społeczności i budować napięcie przed premierą.</li>
+</ul></li>
+<li><p><strong>Dopasowanie godzin transmisji:</strong></p>
+<ul>
+<li>Analiza konkurencji i wybór optymalnych godzin transmisji może pomóc w unikaniu kolizji z innymi popularnymi produkcjami, co z kolei zwiększy szanse na przyciągnięcie większej widowni.</li>
+</ul></li>
+<li><p><strong>Długość odcinków i reklam:</strong></p>
+<ul>
+<li>Uważne dostosowanie długości odcinków do potrzeb fabuły i oczekiwań widzów jest kluczowe. Skrócenie długości bloków reklamowych oraz zminimalizowanie przerywania narracji mogą poprawić doświadczenie oglądania i zniwelować frustracje widzów.</li>
+</ul></li>
+<li><p><strong>Innowacje w narracji:</strong></p>
+<ul>
+<li>Eksperymentowanie z nowymi kierunkami w fabule, niespodziewane zwroty akcji lub wprowadzenie elementów niespotykanych wcześniej mogą przyciągnąć uwagę widzów i utrzymać ich zainteresowanie.</li>
+</ul></li>
+<li><p><strong>Zaangażowanie widzów:</strong></p>
+<ul>
+<li>Stworzenie interaktywnych kampanii marketingowych, konkursów czy platform do dyskusji online może zaangażować widzów w sposób, który wykracza poza samą emisję serialu.</li>
+</ul></li>
+</ol>
+<hr>
+<p>Dziękuję za zapoznanie się z projektem.</p>
+<p>Przygotował: Emil Szewczak</p>
+<p>Przygotowano na zajęcia z Metod Pozyskiwania i Wizualizacji Danych</p>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

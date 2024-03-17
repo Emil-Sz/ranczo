@@ -1,0 +1,75 @@
+"","Actor","Role","X1","X2","X3","X4","X5","X6","X7","X8","X9","X10","Rating"
+"1","Ilona Ostrowska","Lucy Wilska",1,1,1,1,1,1,1,1,1,1,8
+"2","Cezary Żak","ks. bp Piotr Kozioł",1,1,1,1,1,1,1,1,1,1,9.2
+"3","Cezary Żak","Paweł Kozioł",1,1,1,1,1,1,1,1,1,1,9.2
+"4","Paweł Królikowski","Jakub „Kusy” Sokołowski",1,1,1,1,1,1,1,1,1,1,8.1
+"5","Jeff Butcher","Jerry Smith",1,1,1,1,1,0,0,1,1,0,NA
+"6","Grzegorz Wons","Andrzej Więcławski",1,1,1,1,1,1,1,1,1,1,7.6
+"7","Leon Niemczyk","Jan Japycz",1,1,0,0,0,0,0,0,0,0,8.1
+"8","Bogdan Kalus","Tadeusz Hadziuk",1,1,1,1,1,1,1,1,1,1,8.2
+"9","Piotr Pręgowski","Patryk Pietrek",1,1,1,1,1,1,1,1,1,1,8.3
+"10","Dorota Chotecka-Pazura","Krystyna Więcławska",1,1,1,1,1,1,1,1,1,1,7.8
+"11","Violetta Arlak","Halina Kozioł",1,1,1,1,1,1,1,1,1,1,8.1
+"12","Magdalena Waligórska-Lisiecka","Violetta Kotecka",1,1,1,1,1,1,1,1,1,1,7.6
+"13","Arkadiusz Nader","Stanisław Kotecki",1,1,1,1,1,1,1,1,1,1,7.9
+"14","Grażyna Zielińska","Zofia („babka”)",1,0,1,1,1,1,1,1,1,1,7.7
+"15","Marta Chodorowska","Klaudia Kozioł",1,1,1,1,1,1,1,1,1,1,7.8
+"16","Ewa Kuryło","Wiesława Oleś",1,1,1,1,1,1,1,1,1,1,6.6
+"17","Sylwester Maciejewski","Maciej Solejuk",1,1,1,1,1,1,1,1,1,1,8.5
+"18","Marta Lipińska","„Michałowa” Japycz",1,1,1,1,1,1,1,1,1,1,8.8
+"19","Jędrzej Cempura","Marianek Solejuk",1,1,1,1,1,1,1,1,1,1,6.3
+"20","Katarzyna Żak","Kazimiera Solejuk",1,1,1,1,1,1,1,1,1,1,8.6
+"21","Jacek Kawalec","Tomasz Witebski",1,1,1,1,1,1,1,1,1,1,8
+"22","Beata Olga Kowalska","Dorota Wezół",1,1,1,1,1,1,1,1,1,1,7.4
+"23","Dorota Nowakowska","Celina Hadziuk",1,1,1,1,1,1,1,1,1,1,7.6
+"24","Maciej Cempura","Szymek Solejuk",1,1,1,1,1,0,0,0,0,0,6.3
+"25","Anna Stępień","Kasia Solejuk",1,1,1,1,1,0,1,1,1,1,6.1
+"26","Artur Barciś","Arkadiusz Czerepach",1,1,1,1,1,1,1,1,1,1,9
+"27","Wojciech Wysocki","Mieczysław Wezół",1,1,1,1,1,1,1,1,1,1,8
+"28","Magdalena Kuta","Leokadia Czerepach (wcześniej Paciorek)",1,1,1,1,1,1,1,1,1,1,8
+"29","Franciszek Pieczka","Stanisław Japycz",0,1,1,1,1,1,1,1,1,1,8.7
+"30","Piotr Ligienza","Fabian Duda",0,1,1,1,1,1,1,1,1,1,7.4
+"31","Wiktor Zborowski","ks. bp Wacław Sądecki",0,1,0,0,0,1,1,1,1,1,NA
+"32","Przemysław Sadowski","Arkadiusz Stolarkiewicz / Jan Kowalski",0,1,0,0,0,0,0,0,0,0,NA
+"33","Elżbieta Romanowska","Jolanta Pietrek",0,0,1,1,1,1,1,1,1,1,6.9
+"34","Sylwia Gliwa","Weronika Więcławska-Tao",0,0,1,1,0,0,0,0,0,0,NA
+"35","Nam Kyun Kim","Kao Tao",0,0,1,1,0,0,0,0,0,0,NA
+"36","Bartłomiej Kasprzykowski","ks. Robert",0,0,1,1,1,0,0,1,1,1,7.4
+"37","Eugenia Herman","ciotka księdza i wójta",0,0,0,1,0,0,0,0,0,0,NA
+"38","Tomasz Sapryk","Waldemar Myćko",0,0,0,0,1,1,1,1,1,1,7.6
+"39","Aleksander Mikołajczak","Bieżun",0,0,0,0,1,1,0,0,0,0,NA
+"40","Aleksander Mikołajczak","kierowca taksówki",0,0,0,0,0,0,0,0,0,0,NA
+"41","Weronika Kunka","Dorotka",0,0,0,0,1,1,1,1,1,1,5.4
+"42","Wiktoria Kunka","Dorotka",0,0,0,0,1,1,1,1,1,1,5.1
+"43","Marek Lewandowski","Bartkowiak",0,0,0,0,1,1,0,0,0,0,NA
+"44","Tadeusz Hanusek","Kusiba",0,0,0,0,1,1,1,1,1,1,NA
+"45","Leon Charewicz","Ryszard Polakowski",0,0,0,0,1,1,1,1,1,1,7
+"46","Patricia Kazadi","Jagna Nowak",0,0,0,0,1,1,1,1,0,0,5.7
+"47","Dorota Segda","Grażyna",0,0,0,0,1,0,0,0,0,1,NA
+"48","Agnieszka Pawełkiewicz","Kinga",0,0,0,0,1,1,1,1,1,1,6.8
+"49","Anna Iberszer","Francesca Andreani-Witebska",0,0,0,0,1,1,1,1,1,1,7.4
+"50","Mariusz Ostrowski","Antonio",0,0,0,0,1,0,0,0,0,0,NA
+"51","Jan Kulczycki","Ignaczak",0,0,0,0,1,1,0,0,0,0,NA
+"52","Joanna Lissner","matka Zosi",0,0,0,0,1,1,1,0,0,0,NA
+"53","Sławomir Orzechowski","Grzegorz Wargacz",0,0,0,0,1,1,1,1,1,1,7.4
+"54","Iwona Rulewicz","Wargaczowa",0,0,0,0,1,1,0,1,0,0,7.4
+"55","Marta Mazurek","Julia Wargaczówna",0,0,0,0,1,0,0,0,0,0,NA
+"56","Anna Wojton","Jadwiga Myćko",0,0,0,0,1,1,0,0,0,0,6.2
+"57","Szymon Nygard","Konrad",0,0,0,0,0,1,0,0,0,0,NA
+"58","Waldemar Czyszak","Pakuła",0,1,0,1,0,0,0,0,0,0,NA
+"59","Waldemar Czyszak","Hryćko",0,0,0,0,0,1,0,0,0,0,NA
+"60","Waldemar Czyszak","chłop",0,0,0,0,0,0,0,0,0,0,NA
+"61","Mateusz Rusin","ks. Maciej",0,0,0,0,0,1,1,1,1,1,7.9
+"62","Marta Dąbrowska","Zosia",0,0,0,0,0,1,1,0,0,0,5.9
+"63","Lidia Sadowa","dziennikarka",0,0,0,0,0,1,0,0,0,0,NA
+"64","Lidia Sadowa","Ola Kowalska",0,0,0,0,0,0,0,0,1,1,4
+"65","Emilia Komarnicka","Monika Korczab",0,0,0,0,0,0,1,1,1,1,7.3
+"66","Bartłomiej Magdziarz","Łukasz",0,0,0,0,0,0,1,0,0,0,5.7
+"67","Maciej Marczewski","Maciej Zieliński",0,0,0,0,0,0,1,0,0,0,NA
+"68","Robert Majewski","Jędrzej Kowalski",0,0,0,0,0,0,1,1,1,1,NA
+"69","Justyna Gugała","klientka apteki",0,0,0,0,0,0,0,1,0,0,NA
+"70","Justyna Gugała","Weronka",0,0,0,0,0,0,0,0,1,1,NA
+"71","Dobromir Dymecki","Paweł",0,0,0,0,0,0,0,1,1,0,5.3
+"72","Kacper Matula","Wojciech Ostecki",0,0,0,0,0,0,0,0,1,1,NA
+"73","Wiesław Komasa","Marek Karat",0,0,0,0,0,0,0,0,1,1,NA
+"74","Mikołaj Krawczyk","Jakub",0,0,0,0,0,0,0,0,1,1,4

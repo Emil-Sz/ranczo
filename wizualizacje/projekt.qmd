@@ -1,0 +1,798 @@
+---
+title: "Jakie czynniki wpływają na ocenę i oglądalność serialu na podstawie produkcji \"Ranczo\"?"
+format: html
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, message = F, warning = F)
+```
+
+```{r}
+# potrzebne biblioteki
+library(dplyr)
+library(tidyverse)
+library(ggplot2)
+library(corrplot)
+library(plotly)
+library(DT)
+```
+
+```{r}
+# ramki danych
+seazons <- read.csv("seazons.csv")
+seazons_cast <- read.csv("seazons_cast.csv")
+episodes <- read.csv("episodes.csv")
+
+seazons <- seazons[,-1]
+seazons_cast <- seazons_cast[,-1]
+episodes <- episodes[,-1]
+```
+
+```{=html}
+<style>
+body {
+  font-size: 20px;
+  color: #222831;
+  font-family: Verdana;
+  font-size: 20px;
+  background: linear-gradient(90deg, rgba(0,173,181,1) 0%, rgba(0,173,181,1) 5%, rgba(255,255,255,1) 5%, rgba(255,255,255,1) 95%, rgba(0,173,181,1) 95%, rgba(0,173,181,1) 100%);
+}
+
+.title {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  word-spacing: 5px;
+  text-shadow: 2px 2px 0px #00ADB5;
+  font-size: 33px;
+  font-weight: 550;
+}
+
+main{
+    padding-top: 50px;
+}
+
+.logo {
+  width: 300px;
+  margin: 100px auto;
+}
+
+.opis {
+  width: 100%;
+  text-align: right;
+}
+
+.autor {
+  margin-bottom: 100px;
+}
+
+.podtytul {
+  color: #00ADB5;
+  font-weight: bold;
+  letter-spacing: 2px;
+  word-spacing: 7px;
+  text-transform: uppercase;
+  border: none;
+}
+
+.fragment{
+  margin 30px 0 15px 0;
+  color: #00ADB5;
+  font-weight: bold;
+  letter-spacing: 1px;
+  word-spacing: 3px;
+}
+
+.wyroznik {
+  font-family: 'Monospace';
+  letter-spacing: 1px;
+  color: #00ADB5;
+  font-weight: bold;
+}
+
+a{
+  color: #00ADB5;
+}
+
+hr{
+    overflow: visible;
+    padding: 0;
+    border: none;
+    border-top: 3px double #00ADB5;
+    color: #00ADB5;
+    text-align: center;
+}
+hr:after {
+    content: "§";
+    display: inline-block;
+    position: relative;
+    top: -0.9em;
+    font-size: 1.5em;
+    padding: 0 0.25em;
+    color: #00ADB5;
+}
+
+img{
+  display:block;
+  width:100%;
+}
+
+.content, p{
+  margin: 0;
+}
+
+
+</style>
+```
+```{=html}
+<img src="logo.png" class="logo"/>
+
+<p class="opis">Metody Pozyskiwania i Wizualizacji Danych</p>
+
+<p class="opis autor">Przygotował: Emil Szewczak</p>
+
+<h2 class="podtytul">Wstęp</h2>
+```
+Dynamiczny rozwój przemysłu rozrywkowo-telewizyjnego sprawił, że analiza czynników wpływających na ocenę i oglądalność seriali stała się obszarem szczególnie interesującym dla badaczy. W kontekście polskiej sceny telewizyjnej jednym z fenomenów, który zyskał szczególną popularność i uznanie, jest serial "Ranczo". Jego trwała obecność w świadomości widzów i kultowy status stawiają go w centrum uwagi, jako obiekt dogłębnej analizy.
+
+Celem niniejszego projektu jest dokładne zbadanie czynników, które przyczyniają się do sukcesów i porażek "Rancza" w kontekście oceny widzów i poziomu oglądalności. Wartościowe wnioski z takiej analizy mogą nie tylko zaspokoić ciekawość badaczy, ale również dostarczyć praktycznych wskazówek dla twórców i producentów serialu oraz innych podmiotów zainteresowanych kreowaniem atrakcyjnych treści telewizyjnych.
+
+```{=html}
+<h3 class="fragment">Dane wykorzystane do analizy</h3>
+```
+Dane, które wykorzystałem do analizy, udało mi się zescrapować ze stron <a href="https://www.filmweb.pl/serial/Ranczo-2006-262774">Flimweb</a> oraz <a href="https://pl.wikipedia.org/wiki/Ranczo_(serial_telewizyjny)">Wikipedia</a>.
+
+Udało mi się utworzyć 3 ramki danych:
+
+<ul>
+
+<li>[seazons]{.wyroznik} - 10 obserwacji 6 zmiennych,</li>
+
+<li>[seazons_cast]{.wyroznik} - 74 obserwacji 13 zmiennych,</li>
+
+<li>[episodes]{.wyroznik} - 130 obserwacji 7 zmiennych.</li>
+
+</ul>
+
+Do pobrania danych wykorzystałem bibliotekę dostępną w R o nazwie [rvest]{.wyroznik}.
+
+```{=html}
+<h3 class="fragment">Seazons</h3>
+```
+Ta ramka danych zawiera informacje o sezonach serialu. Konkretnie zawiera kolumny:
+
+<ul>
+
+<li>[Seazon]{.wyroznik} - numer sezonu,</li>
+
+<li>[Rating]{.wyroznik} - średnia ocena sezonu z serwisu <a href="https://www.filmweb.pl/serial/Ranczo-2006-262774">Flimweb</a>,</li>
+
+<li>[Votes]{.wyroznik} - liczba głosów, które wpłynęły na ocenę,</li>
+
+<li>[Year]{.wyroznik} - rok wydania,</li>
+
+<li>[Broadcast]{.wyroznik} - godzina premiery telewizyjnej (każdy odcinek w sezonie był transmitowany o tej samej godzinie, każdy odcinek miał premierę w niedziele),</li>
+
+<li>[Viewership]{.wyroznik} - średnia oglądalność odcinków w sezonie na antenie TVP1 w chwili premiery z serwisu <a href="https://pl.wikipedia.org/wiki/Ranczo_(serial_telewizyjny)">Wikipedia</a>.</li>
+
+</ul>
+
+```{r}
+datatable(seazons)
+```
+
+```{=html}
+<h3 class="fragment">Seazons_cast</h3>
+```
+Ta ramka danych zawiera informacje o obsadzie serialu oraz rolach w jakie wcielili się aktorzy w danym sezonie. Konkretnie zawiera kolumny:
+
+<ul>
+
+<li>[Actor]{.wyroznik} - imię i nazwisko aktora,</li>
+
+<li>[Role]{.wyroznik} - nazwa postaci, w którą wciela się dany aktor,</li>
+
+<li>[Rating]{.wyroznik} - średnia ocena postaci z serwisu <a href="https://www.filmweb.pl/serial/Ranczo-2006-262774">Flimweb</a>,</li>
+
+<li>oraz kolumny ponumerowane od [X1]{.wyroznik} do [X10]{.wyroznik} (nazwy odpowiadają numerom sezonów) z wartościami [1]{.wyroznik} lub [0]{.wyroznik} (1 - postać występowała w tym sezonie, 0 - postać nie występowała w danym sezonie).</li>
+
+</ul>
+
+```{r}
+datatable(seazons_cast)
+```
+
+```{=html}
+<h3 class="fragment">Episodes</h3>
+```
+Ta ramka danych zawiera informacje o odcinkach serialu. Konkretnie zawiera kolumny:
+
+<ul>
+
+<li>[Seazon]{.wyroznik} - numer sezonu,</li>
+
+<li>[Number]{.wyroznik} - numer odcinka,</li>
+
+<li>[Title]{.wyroznik} - tytuł odcinka,</li>
+
+<li>[Rating]{.wyroznik} - średnia ocena odcinka z serwisu <a href="https://www.filmweb.pl/serial/Ranczo-2006-262774">Flimweb</a>,</li>
+
+<li>[Votes]{.wyroznik} - liczba głosów, które wpłynęły na średnią ocenę konkretnego odcinka,</li>
+
+<li>[Duration]{.wyroznik} - czas trwania odcinka (wyrażony w minutach),</li>
+
+<li>[Cast]{.wyroznik} - postacie występujące w danych odcinkach (oddzielone znakiem "[\|]{.wyroznik}")</li>
+
+</ul>
+
+```{r}
+datatable(episodes[c("Seazon", "Number", "Title", "Rating", "Votes", "Duration" )])
+```
+
+```{=html}
+<h2 class="podtytul">Analiza danych dot. sezonów</h2>
+```
+Poniższy wykres przedstawia średnie oceny (na 10) oraz oglądalność (w mln) poszczególnych sezonów produkcji.
+
+<br/>
+
+```{r}
+# Wykres plotly z interaktywnymi etykietami
+plot_ly(
+  data = seazons, 
+  x = ~Seazon, 
+  type = 'bar', 
+  y = ~Rating, 
+  name = 'Ocena', 
+  marker = list(color = '#00171F')) %>%
+  add_trace(
+    y = ~Viewership, 
+    name = 'Oglądalność', 
+    marker = list(color = '#003459')) %>%
+  layout(
+    title = "Wykres 1. Oceny i oglądalność",
+    xaxis = list(
+      title = 'Sezon', 
+      tickvals = seazons$Seazon, 
+      ticktext = as.character(seazons$Seazon)),
+    yaxis = list(
+      title = 'Ocena (na 10) | Oglądalność (mln)',
+      overlaying = "y"),
+    legend = list(x = 0, y = 1),
+    barmode = 'group')
+```
+
+<br/>
+
+Można z niego odczytać, że pierwsze 4 sezony plasują się w topce średnich ocen i odstają od pozostałych o kilka dziesiątych. Najniżej ocenianym sezonem jest sezon 9, a najwyżej sezony 3 i 4. Zwróćmy uwagę jeszcze na oglądalność. Najwyższą oglądalność miał sezon 4, lecz widać tendencję wzrostową od 1 do 4 części serialu. Z każdy z kolejnych cykli serialu miał już coraz mniejszą oglądalność, najniższą sezon 10.
+
+Warto zauważyć, że sezon pierwszy mimo niskiej oglądalności, ma dość wysokie oceny. Wynika to z tego, że ludzie rzadko zaczynają nowe produkcje na antenie TV. Gdy jednak serial był już dostępny na platformach streamingowych, dotarł on do większej ilości odbiorców (pewnie przez metodę poleceń). Jako że cieszy się dobrymi ocenami nie będę analizował niskiej oglądalności sezonu 1.
+
+```{=html}
+<h3 class="fragment">Skąd wzrost oceny pomiędzy drugim a trzecim sezonem?</h3>
+```
+Przeprowadzę analizę porównawczą drugiej i trzeciej części, czego celem będzie znalezienie przyczyn wyższych ocen cyklu trzeciego względem drugiego.
+
+Zacznijmy od tego, że pierwsze 4 sezony były wydawane w odstępach co rok. Każda część składa się z 13 odcinków. Wszystkie odcinki z 4 pierwszych sezonów zostały transmitowane w niedziele o godzinie 20:15. W tych cyklach występowało średnio 32 bohaterów.
+
+```{r}
+characters_in_S1_S4 <- mean(
+  c(
+    sum(seazons_cast$X1), 
+    sum(seazons_cast$X2), 
+    sum(seazons_cast$X3), 
+    sum(seazons_cast$X4)
+    ))
+```
+
+Sezony 2 i 3 nie różniły się wielką ilością danych, lecz udało mi się znaleźć dwie znaczące różnice.
+
+<hr/>
+
+Poniższy wykres przedstawia średni czas trwania odcinka w sezonach 2 i 3.
+
+```{r}
+episodes %>% 
+  filter(Seazon %in% c(2,3)) %>% 
+  ggplot(aes(x = factor(Seazon), 
+             y = Duration, 
+             fill=factor(Seazon))) +
+  geom_boxplot() + 
+  labs(title = "Wykres 2. Średni czas trwania odcinka", 
+       x = "Numer sezonu", 
+       y = "Czas trwania (minuty)") + 
+  guides(fill = "none")+ 
+  theme_minimal()+ 
+  scale_y_continuous(limits = c(45, 55), 
+                     breaks = seq(45, 55, by = 1))
+```
+
+Jak widać, nie zmalała ona o dużo (dokładnie o 1 minutę), ale być może właśnie to wpłynęło na lepsze oceny cyklu trzeciego. Im krócej trwają odcinki, tym mniej czasu poświęcamy na ich oglądanie, więc nie wydają się one nudne.
+
+<hr/>
+
+Poniższy wykres przedstawia osoby, które dołączyły do produkcji w 3 sezonie i osoby, które z niej odeszły po 2 części oraz ocenę ich postaci. Jest także zaznaczona średnia ocena każdej postaci (wynosi ona około: [7.3]{.wyroznik})
+
+```{r}
+leave_in_S2 <- seazons_cast$Role[(seazons_cast['X2'] == 1) & (seazons_cast['X3'] == 0)]
+leave_in_S2 <- seazons_cast[seazons_cast$Role %in% leave_in_S2, ]
+new_in_S3 <- seazons_cast$Role[(seazons_cast['X2'] == 0) & (seazons_cast['X3'] == 1)]
+new_in_S3 <- seazons_cast[seazons_cast$Role %in% new_in_S3, ]
+
+S2_S3 <- rbind(leave_in_S2, new_in_S3)
+average <- mean(seazons_cast$Rating, na.rm=T)
+
+S2_S3 %>% 
+  select(Role, Rating, X2) %>% 
+  filter(!is.na(Rating)) %>% 
+  mutate(X2= ifelse(X2 == 0, "Nowa", "Odeszła")) %>% 
+  ggplot(aes(x=Role, y=Rating, fill=X2))+
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Wykres 3. Oceny postaci",
+       x = "Rola",
+       y = "Ocena",
+       fill = "Postacie:") +
+  scale_fill_manual(values = c("#003459", "#00171F")) +
+  theme_minimal()+
+  geom_hline(yintercept = average, linetype = "dashed", color = "#00A8E8") +
+  annotate("text", x = 4, y = 7.5, label = "Średnia", color = "#00A8E8", hjust = 0)
+  
+```
+
+Mimo odejścia z "Rancza" bohatera "Jan Japycz", który był oceniany najlepiej z przedstawionych postaci, to właśnie pojawienie się 3 nowych osób, a wraz z nimi wątków pozytywnie odbiło się na ocenach serialu. Ważne także, że ci nowi bohaterowie ("Jolanta Pietrek" i "ksiądz Robert") byli w miarę lubiani. Powrót postaci "Zofii (babki)", która była jedną z bardziej popularnych i docenianych postaci przez masy, również miał wpływ na oceny. Niestety, śmierć aktora, który grał "Jana Japycza" (Leon Niemczyk), w 2006 roku wpłynęła na brak możliwości pojawienia się jego postaci w kolejnych sezonach.
+
+<hr/>
+
+Poniższy wykres przedstawia liczbę głosów, z których składa się średnia ocena odcinka.
+
+```{r}
+ggplot(seazons, aes(x = factor(Seazon), y = Votes)) +
+  geom_jitter(position = position_jitter(width = 0, height = 0), color = "#003459", alpha = 0.7) +
+  labs(title = "Wykres 4. Rozkład Liczby Głosów",
+       x = "Sezon", y = "Liczba Głosów") +
+  theme_minimal()+
+  geom_text(aes(label = Votes), vjust = -0.7, hjust = 0.5, size = 3, color = "#003459")+
+  scale_y_continuous(limits = c(270, 450), breaks = seq(270, 450, by = 30))
+```
+
+Widać tutaj, że sezony początkowe mają większą liczbę głosów. Może to także wpłynąć na ocenę sezonu 3, ponieważ ludzie decydują się na oglądanie dalej serialu, jeśli podobała im się poprzednia część. Zatem skoro cykl drugi miał więcej głosów, możemy stwierdził, że przyciągną on większą grupę odbiorców do sezonu 3.
+
+<hr />
+
+Podsumowując tą część analizy, mogę stwierdzić, że istnieje klika czynników, przez które sezon 3 ma lepsze oceny od drugiego. Oto one:
+
+<ul>
+
+<li>Spadek średniej długości trwania odcinków,</li>
+
+<li>Pojawienie się nowych, docenianych bohaterów,</li>
+
+<li>Powrót postaci, która nie brała udziału w poprzedniej części, lecz jest dobrze znana i lubiana,</li>
+
+<li>Większe zaangażowanie w poprzedni sezon, przyciąga większą grupę odbiorców.</li>
+
+</ul>
+
+<hr/>
+
+```{=html}
+<h3 class="fragment">Skąd wzrost oglądalności między trzecim a czwartym sezonem?</h3>
+```
+Między trzecią a czwartą częścią serialu "Ranczo" możemy zauważyć wzrost średniej oglądalności na antenie TV prawie o [1.3 mln]{.wyroznik}. Na aż taką różnicę mogło wpłynąć klika czynników. Na pewno duży wpływ na to miał sukces trzeciego cyklu. Oba sezony są średnio oceniane na [8.7]{.wyroznik}, co jest najwyższą oceną względem pozostałych części. Skoro sezon trzeci uzyskał najlepsze opinie, to odbiorcy byli ciekawi, co pojawi się w kolejnej części. Właśnie to może być jeden z powodów tak wysokiej oglądalności sezonu czwartego.
+
+Między tymi cyklami także nie ma zadziwiających różnic. Są one wydawane w stałych odstępach (tak jak poprzednie części co rok). Wszystkie odcinki zostały transmitowane w niedziele o godzinie 20:15. Udało mi się jednak znaleźć kilka mniejszych bądź większych różnic.
+
+<hr/>
+
+Poniższy wykres przedstawia średni czas trwania odcinka w sezonach 3 i 4.
+
+```{r}
+episodes %>% 
+  filter(Seazon %in% c(3,4)) %>% 
+  ggplot(aes(x = factor(Seazon), y = Duration, fill=factor(Seazon))) +
+  geom_boxplot() +
+  labs(title = "Wykres 5. Średni czas trwania odcinka",
+       x = "Numer sezonu",
+       y = "Czas trwania (minuty)") +
+  guides(fill = "none")+
+  theme_minimal()+
+   scale_y_continuous(limits = c(45, 55), breaks = seq(45, 55, by = 1))
+```
+
+Między tymi sezonami można zauważyć wzrost średniej długości trwania odcinka (także o minutę). Być może to, że sezon 3 cieszy się dobrymi ocenami oraz jest popularnie uważany za jeden z lepszych sezonów, wpłynęło na chęć poświęcenia więcej czasu bohaterom, których znamy i lubimy. Warto też zaznaczyć, że nikt nie opuścił produkcji po 3 cyklu (wszystkie postacie możemy zobaczyć ponownie w kolejnej części).
+
+<hr/>
+
+Poniższy wykres przedstawia bohaterów sezonu 4 oraz ich oceny. Narysowana jest także średnia ocen wszystkich postaci.
+
+```{r}
+seazons_cast %>% 
+  select(Role, X4, Rating) %>% 
+  filter(X4==1) %>% 
+  filter(!is.na(Rating)) %>% 
+  ggplot(aes(x = Role, y = Rating, fill=Rating))+
+  geom_bar(stat = "identity", position = "dodge") +
+  scale_fill_gradient(low="#006d96", high="#00B9F9") + 
+  labs(title = "Wykres 6. Oceny postaci", x = "Postać", y = "Ocena", fill = "Ocena") +
+  scale_y_continuous(breaks = seq(1, 11, 1))+
+  theme_minimal()+
+  geom_hline(yintercept = average, linetype = "dashed", color = "#00171F") +
+  annotate("text", x = 27, y = 7.8, label = "Średnia", color = "#00171F", hjust = 0)+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.2, hjust = 1))
+```
+
+Jak widać na wykresie większość postaci części czwartej "Rancza" jest oceniana powyżej średniej ocen postaci. Są także osoby, które są dosyć nisko oceniane przez widownie. Są to:
+
+<ul>
+
+<li>[Jolanta Pietrek]{.wyroznik} - postać drugoplanowa</li>
+
+<li>[Kasia Solejuk]{.wyroznik} - postać epizodyczna</li>
+
+<li>[Marianek Solejuk]{.wyroznik} - postać epizodyczna</li>
+
+<li>[Szymek Solejuk]{.wyroznik} - postać epizodyczna</li>
+
+<li>[Wiesława Oleś]{.wyroznik} - postać epizodyczna</li>
+
+</ul>
+
+Jak widać, żadna z głównych i pierwszoplanowych postaci nie była oceniana poniżej średniej. W takim razie możemy jasno stwierdzić, że widzom podobały się wątki oraz sytuacje, w które byli wplatani bohaterowie. Warto też zaznaczyć, że postacie epizodyczne i drugoplanowe niemal w każdej produkcji są niżej oceniane niż główna obsada. Pojawili się oni tylko na kilka minut na przełomie całego sezonu, więc ich obecność nie miała aż takiego wpływu na oglądalność serialu.
+
+<hr />
+
+Podsumowując tą część analizy, mogę stwierdzić, że jest klika powodów przez które sezon 4 ma wyższą oglądalność względem części trzeciej. Oto one:
+
+<ul>
+
+<li>Sukces trzeciego cyklu (dobre oceny) przyciągnął większą grupę odbiorców docelowych,</li>
+
+<li>Utrzymanie znanych i lubianych bohaterów z poprzedniej części jest powodem, przez który nie trzeba wkładać wielkiego zaangażowania w poznanie postaci (wszystkich dobrze już znamy),</li>
+
+<li>Brak nowych, mniej lubianych postaci.,</li>
+
+<li>Zwiększenie długości odcinków po sukcesie poprzedniej części (widzowie chcą spędzać więcej czasu z ulubionymi postaciami).</li>
+
+</ul>
+
+<hr/>
+
+```{=html}
+<h3 class="fragment">Skąd taki spadek w oglądalności i ocenach między czwartym a piątym cyklem?</h3>
+```
+Jak już wiemy, z poprzedniej części analizy cykl czwarty produkcji ma najwyższą oglądalność, ale także najwyższe oceny. Natomiast kolejna część ma już ocenę niższą o klika dziesiątych a oglądalność aż o [1.6 mln]{.wyroznik}. Co wpłynęło na taki obrót sytuacji?
+
+<hr/>
+
+Poniższy wykres przedstawia lata, w których były wydawane kolejne części produkcji, wraz z ocenami i oglądalnością, w konkretnych latach.
+
+```{r}
+ggplot(seazons, aes(x = Year)) +
+  geom_point(aes(y = Rating, color = "Oceny"), size = 3) +
+  geom_smooth(aes(y = Rating, color = "Oceny"), method = "lm", se = FALSE) +
+  geom_point(aes(y = Viewership, color = "Viewership"), size = 3) +
+  geom_smooth(aes(y = Viewership, color = "Viewership"), method = "lm", se = FALSE) +
+  labs(title = "Wykres 7. Oceny i oglądalność",
+       x = "Rok",
+       y = "Wartość") +
+  theme_minimal() +
+  scale_color_manual(values = c("Oceny" = "#00A8E8", "Viewership" = "#003459")) +
+  guides(color = guide_legend(title = "Typ: "))+
+  scale_x_continuous(breaks = seq(2006, 2016, 1))
+
+```
+
+Jak widać na powyższym wykresie w 2010 roku nie było nowego sezonu serialu. Przerwa w produkcji mogła wpłynąć na spadek oglądalności i ocen w kolejnym sezonie.
+
+<hr/>
+
+Poniższy wykres przedstawia w jaki sposób zmiana godziny transmisji odcinków serialu wpłynęła na oceny i oglądalność produkcji.
+
+```{r}
+ggplot(seazons, aes(x = Rating, y = Viewership, color = factor(Broadcast))) +
+  geom_point(size = 3) +
+  geom_text(label=seazons$Seazon, hjust = 0.5, vjust = -1) +
+  labs(title = "Wykres 8. Godzina transmisji",
+       x = "Ocena",
+       y = "Oglądalność",
+       color="Godzina transmisji") +
+  theme_minimal()+
+  scale_color_manual(values = c("#00A8E8","#003459"))
+
+```
+
+Jak widać na powyższym wykresie, sezony, które były transmitowane o godzinie [20:15]{.wyroznik}, czyli 4 pierwsze części produkcji mają wyższe oceny od pozostałych. Mają też one większą średnią oglądalność.
+
+Zmiana godziny transmisji produkcji mogła wpłynąć na oglądalność i oceny. Być może taka zmiana kolidowała z innymi serialami i odbiorcy byli zmuszani dokonywać wyboru między "Ranczem" a innym serialem.
+
+<hr/>
+
+Poniższy wykres przedstawia osoby, które dołączyły do produkcji w 5 sezonie oraz ocenę ich postaci. Jest także zaznaczona średnia ocena każdej postaci (wynosi ona około: [7.3]{.wyroznik})
+
+```{r}
+leave_in_S4 <- seazons_cast$Role[(seazons_cast['X4'] == 1) & (seazons_cast['X5'] == 0)]
+leave_in_S4 <- seazons_cast[seazons_cast$Role %in% leave_in_S4, ]
+new_in_S5 <- seazons_cast$Role[(seazons_cast['X4'] == 0) & (seazons_cast['X5'] == 1)]
+new_in_S5 <- seazons_cast[seazons_cast$Role %in% new_in_S5, ]
+
+S4_S5 <- rbind(leave_in_S4, new_in_S5)
+
+S4_S5 %>% 
+  select(Role, Rating, X4) %>% 
+  filter(!is.na(Rating)) %>% 
+  mutate(X4= ifelse(X4 == 0, "Nowa", "Odeszła")) %>% 
+  ggplot(aes(x=Role, y=Rating, fill=X4))+
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = "Wykres 9. Oceny postaci",
+       x = "Rola",
+       y = "Ocena",
+       fill = "Postacie:") +
+  scale_fill_manual(values = c("#003459", "#00171F")) +
+  theme_minimal()+
+  geom_hline(yintercept = average, linetype = "dashed", color = "#00A8E8") +
+  annotate("text", x = 0, y = 7.5, label = "Średnia", color = "#00A8E8", hjust = 0)+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.2, hjust = 1))
+  
+```
+
+Mimo pojawienia się dziewięciu nowych postaci (są one głownie pierwszo i drugoplanowe), żaden ze znanych bohaterów nie odszedł z produkcji. Wprowadzenie tylu nowych postaci wymaga od widzów zaangażowania w poznanie tych bohaterów i przyzwyczajenie się do nich. Gdy sezon 4 był sukcesem należało się trzymać dobrej formy i nie wprowadzać aż tylu zmian.
+
+Jak widać ci nowi bohaterowie nie są zbyt lubiani przez widzów. Tylko 4 z dziewięciu postaci jest oceniana ponad średnią ocenę. Dlatego wprowadzenie tylu bohaterów, którzy mają niskie oceny nie jest dobre ze względu na oceny i oglądalność sezonu piątego.
+
+<hr/>
+
+Poniższy wykres przedstawia średni czas trwania odcinka w sezonach 4 i 5.
+
+```{r}
+episodes %>% 
+  filter(Seazon %in% c(4,5)) %>% 
+  ggplot(aes(x = factor(Seazon), y = Duration, fill=factor(Seazon))) +
+  geom_boxplot() +
+  labs(title = "Wykres 10. Średni czas trwania odcinka",
+       x = "Numer sezonu",
+       y = "Czas trwania (minuty)") +
+  guides(fill = "none")+
+  theme_minimal()+
+   scale_y_continuous(limits = c(43, 50), breaks = seq(43, 50, by = 1))
+```
+
+Między tymi sezonami można zauważyć spadek średniej długości trwania odcinka (o 2 minuty). Mimo wprowadzenia tylu nowych postaci także zmniejszono czas trwania odcinków, co powoduje, że ciężko jest poznać i polubić te nowe postacie. Taki spadek w długości trwania odcinków mógł też wpłynąć na zwiększenie bloków reklamowych. Dłuższe reklamy także powodują frustrację u odbiorców, także stąd może wynikać spadek w oglądalności.
+
+<hr/>
+
+Podsumowując tą część analizy, mogę stwierdzić, że istnieje klika czynników przez które sezon 5 ma gorsze oceny i oglądalność względem czwartej części. Oto one:
+
+<ul>
+
+<li>Dwa lata przerwy między sezonem 4 a 5 (jedyna przerwa tej długości) spowodowała, że widzowie mogli zapomnieć o produkcji, przez co ciężej było im do niej wrócić,</li>
+
+<li>Zmiana godziny transmisji odcinków Rancza, przez co mogły one kolidować z innymi produkcjami (widzowie musieli dokonać wyboru, który serial obejrzeć),</li>
+
+<li>Wprowadzenie wielu nowych postaci (utrata klimatu poprzedniej części, która była najlepiej oceniana i miała największą oglądalność),</li>
+
+<li>Skrócenie długości trwania odcinków, przez co ciężko było poznać i polubić nowe postacie,</li>
+
+<li>Zwiększenie długości bloków reklamowych, co powoduje frustracje u odbiorców i chęć zmiany kanału telewizyjnego.</li>
+
+</ul>
+
+```{=html}
+<h3 class="fragment"> Dlaczego ostatnie sezony są oceniane najgorzej i mają najmniejszą oglądalność? </h3>
+```
+Jak widać na wykresie 1 (Oceny i oglądalność sezonów) oraz na wykresie 7 (Oceny i oglądalność w latach) im późniejszy sezon, tym mniejsze oceny i oglądalność.
+
+Jak widać na wykresie 8 (Godzina transmisji) została zmieniona godzina emisji odcinków od sezonu piątgo na [20:25]{.wyroznik}. O efektach takiej zmiany wspominałem wcześniej.
+
+Może to wynikać z tego, że produkcja "Ranczo" ma specyficzną fabułę. Opowiada ona o zmianach wsi ze względu na czynniki zewnętrzne. Być może wraz ze zmianą czasów taka fabuła stała się nierealna, zatrzymana w czasie, przez co mniej atrakcyjna dla odbiorców. Serial miał aż 10 sezonów, jest to dosyć dużo jak na Polską produkcję, lecz właśnie taka długość mogła powodować zmęczenie takim samym formatem i wątkami.
+
+Dodatkowo w późniejszych sezonach zmienił się klimat produkcji. Zmienili się bohaterowie, wątki a także fabuła, więc produkcja straciła klimat z pierwszych części.
+
+<hr/>
+
+Poniższy wykres przedstawia 10 najgorzej ocenianych postaci wraz z podpisem, w którym sezonie pojawili się po raz pierwszy.
+
+```{r}
+seazons_cast %>% 
+  filter(!is.na(Rating)) %>% 
+  arrange(Rating) %>%
+  mutate(Actor=paste0(Actor, " | ", Role)) %>% 
+  head(10) %>% 
+  ggplot(aes(x = reorder(Actor, Rating), y = Rating, label = Role)) +
+  geom_bar(stat = "identity", fill = "#00A8E8") +
+  geom_text(aes(label = ifelse(X1 == 1, "Sezon 1", 
+                               ifelse(X2 == 1, "Sezon 2",
+                               ifelse(X3 == 1, "Sezon 3",
+                               ifelse(X4 == 1, "Sezon 4",
+                               ifelse(X5 == 1, "Sezon 5",
+                               ifelse(X6 == 1, "Sezon 6",
+                               ifelse(X7 == 1, "Sezon 7",
+                               ifelse(X8 == 1, "Sezon 8",
+                               ifelse(X9 == 1, "Sezon 9",
+                               ifelse(X10 == 1, "Sezon 10", ""))))))))))),
+hjust = 1.1, vjust = 0.2, angle = 90) +
+    labs(title = "Wykres 11. Najniżej oceniane postacie",
+       x = "Aktor | Rola",
+       y = "Ocena") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(vjust = 0.5, hjust = 1, angle=90))
+```
+
+Jak widać na powyższym wykresie najgorzej oceniane postacie głównie pojawiły się pierwszy raz w sezonach 5-9 (z wyjątkiem [Kasii Solejuk]{.wyroznik}, która jest postacią epizodyczną od pierwszego sezonu). Przez wprowadzenie wielu nowych postaci serial stracił swój klimat z poprzednich części. Wprowadzone postacie także były postrzegane przez odbiorców jako mniej lubiane, gorsze od innych postaci, co wpłynęło na gorszą oglądalność i oceny ostatnich sezonów.
+
+<hr/>
+
+Poniższy wykres przedstawia średni czas trwania odcinka w sezonach od 4 do 10.
+
+```{r}
+episodes %>%
+  filter(Seazon %in% c(4, 5, 6, 7, 8, 9, 10)) %>%
+  ggplot(aes(x = factor(Seazon), y = Duration, fill = factor(Seazon))) +
+  geom_boxplot() +
+  labs(title = "Wykres 12. Średni czas trwania odcinka",
+       x = "Numer sezonu",
+       y = "Czas trwania (minuty)") +
+  guides(fill = "none") +
+  theme_minimal() +
+  scale_y_continuous(limits = c(42, 49), breaks = seq(40, 59, by = 1)) +
+  scale_fill_manual(values = rep(c("#007EA7"), times=7))
+
+```
+
+Między tymi sezonami można zauważyć spadek średniej długości trwania odcinka. O efektach zmniejszonego czasu odcinka pisałem już kilka razy. To samo dotyczy się tego wykresu.
+
+<hr/>
+
+Z każdym sezonem te czynniki coraz bardziej wpływały na gorsze oceny i oglądalność.
+
+<hr/>
+
+```{=html}
+<h2 class="podtytul"> Najlepsze i najgorsze odcinki </h2>
+```
+Poniższy wykres przedstawia 5 najlepiej i 5 najgorzej ocenianych odcinków, wraz z zaznaczoną średnią oceną wszystkich odcinków (wynosi ona około [8.3]{.wyroznik}).
+
+```{r}
+top5_episodes <- episodes %>%
+  arrange(desc(Rating)) %>%
+  head(5)
+
+bottom5_episodes <- episodes %>%
+  arrange(Rating) %>%
+  head(5)
+
+combined_data_rating <- bind_rows(mutate(top5_episodes, Type = "Najlepsze 5"),
+                           mutate(bottom5_episodes, Type = "Najgorsze 5"))
+
+ggplot(combined_data_rating, aes(x = reorder(paste0(Title, " ", Seazon, ":", Number), Rating), y = Rating, fill = Type)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_hline(yintercept = mean(episodes$Rating), linetype = "dashed", color = "#00171F") +
+  annotate("text", x = 0.5, y = 9, label = "Średnia", color = "#00171F", hjust = 0)+
+  labs(title = "Wykres 13. Najlepsze i najgorsze odcinki",
+       x = "Odcinek",
+       y = "Ocena",
+       fill= "Ranking") +
+  theme_minimal() +
+  scale_fill_manual(values = c("Najlepsze 5" = "#00A8E8", "Najgorsze 5" = "#007EA7")) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+```
+
+Jak widać na wykresie najgorsze odcinki są z 2 ostatnich sezonów, a najlepsze są w pierwszych czterech częściach produkcji. Potwierdzają to oceny poszczególnych sezonów (początkowe sezony są lepiej oceniane niż końcowe).
+
+<hr/>
+
+Poniższy wykres przedstawia 5 najkrótszych i 5 najdłuższych odcinków, wraz z zaznaczoną średnią długością trwania odcinka (wynosi ona około [45]{.wyroznik} minut). Ma także podpisaną ocenę każdego odcinka.
+
+```{r}
+top5_longest_episodes <- episodes %>%
+  arrange(desc(Duration)) %>%
+  head(5)
+
+bottom5_shortest_episodes <- episodes %>%
+  arrange(Duration) %>%
+  head(5)
+
+combined_data_duration <- bind_rows(
+  mutate(top5_longest_episodes, Type = "Najdłuższe 5"), 
+  mutate(bottom5_shortest_episodes, Type = "Najkrótsze 5"))
+
+ggplot(combined_data_duration, aes(x = reorder(paste0(Title, " ", Seazon, ":", Number), Duration), y = Duration, fill = Type)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_hline(yintercept = mean(episodes$Duration), linetype = "dashed", color = "#00171F") +
+  annotate("text", x = 0.5, y = 48.5, label = "Średnia", color = "#00171F", hjust = 0)+
+  labs(title = "Wykres 14. Najkrótsze i najdłuższe odcinki",
+       x = "Odcinek",
+       y = "Ocena",
+       fill= "Ranking") +
+  theme_minimal() +
+  geom_text(aes(label = sprintf("%.1f", Rating)), vjust = 1, position = position_dodge(width = 0.9)) +
+  scale_fill_manual(values = c("Najdłuższe 5" = "#00A8E8", "Najkrótsze 5" = "#007EA7")) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+
+```
+
+Jak widać na powyższym wykresie odcinki, które trwają najkrócej (są z sezonu 6) są także niżej oceniane. Odcinki które trwają dłużej, maja lepsze oceny i są one głównie z sezonu 1 i 2. Potwierdza to także wniosek, że dłuższe odcinki są lepiej oceniane od krótszych.
+
+<hr/>
+
+Poniższy wykres przedstawia 5 odcinków z najmniejszą i największą liczbą głosów, które wpływają na średnią, wraz z zaznaczoną średnią liczbą głosów (wynosi ona około [443]{.wyroznik} głosy). Ma także podpisaną ocenę każdego odcinka.
+
+```{r}
+top5_most_voted_episode <- episodes %>%
+  arrange(desc(Votes)) %>%
+  head(5)
+
+bottom5_least_voted_episode <- episodes %>%
+  arrange(Votes) %>%
+  head(5)
+
+combined_data_votes <- bind_rows(mutate(top5_most_voted_episode, Type = "5 z największą liczbą głosów"),
+                           mutate(bottom5_least_voted_episode, Type = "5 z najmiejszą liczbą głosów"))
+
+ggplot(combined_data_votes, aes(x = reorder(paste0(Title, " ", Seazon, ":", Number), Votes), y = Votes, fill = Type)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_hline(yintercept = mean(episodes$Votes), linetype = "dashed", color = "#00171F") +
+  annotate("text", x = 0.5, y = 485, label = "Średnia", color = "#00171F", hjust = 0)+
+  labs(title = "Wykres 15. Odcinki z największą i najmniejszą liczbą głosów",
+       x = "Odcinek",
+       y = "Liczba głosów",
+       fill= "Ranking") +
+  theme_minimal() +
+  geom_text(aes(label = sprintf("%.1f", Rating)), vjust = 1, position = position_dodge(width = 0.9)) +
+  scale_fill_manual(values = c("5 z największą liczbą głosów" = "#00A8E8", "5 z najmiejszą liczbą głosów" = "#007EA7")) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+```
+
+Jak widać na powyższym wykresie odcinki z większą liczbą głosów mają lepsze oceny niż odcinki z małą liczbą głosów. Dodatkowo najwięcej głosów mają odcinki z sezonu 1 i 4 (bardzo dobrze oceniane sezony), a najmniej z sezonu 10 (jeden z gorzej ocenianych sezonów). Sezon 10 ma też najniższą oglądalność, więc z tego może wynikać niska liczba ocen.
+
+<hr/>
+
+```{=html}
+<h2 class="podtytul"> Podsumowanie </h2>
+```
+Analiza sezonu 4 wskazuje na kilka kluczowych czynników, które przyczyniły się do jego sukcesu w porównaniu z sezonem 3. Przyciągnęło to większą grupę odbiorców docelowych, głównie dzięki sukcesowi poprzedniego cyklu, dobrym ocenom oraz utrzymaniu znanych i lubianych postaci. Warto zauważyć, że zwiększenie długości odcinków po sukcesie poprzedniej części pozwoliło widzom spędzać więcej czasu z ulubionymi bohaterami.
+
+Natomiast analiza sezonu 3 sugeruje, że kilka czynników przyczyniło się do lepszych ocen w porównaniu z sezonem 2. Spadek średniej długości trwania odcinków, pojawienie się nowych, docenianych postaci, powrót dobrze znanej postaci z poprzednich sezonów oraz większe zaangażowanie w poprzednią serię przyciągnęły większą grupę odbiorców.
+
+Niestety, sezon 5 zanotował spadek oglądalności i ocen w porównaniu z sezonem 4. Przerwa dwóch lat między sezonami, zmiana godziny transmisji, wprowadzenie wielu nowych postaci, skrócenie długości trwania odcinków i zwiększenie długości bloków reklamowych przyczyniły się do tego spadku. Widzowie mogli zapomnieć o produkcji, a zmiany w formule serialu mogły wpłynąć negatywnie na jego klimat i atrakcyjność.
+
+```{=html}
+<h3 class="fragment"> Co powinni zrobić twórcy, aby poprawić oceny i oglądalność serii? </h3>
+```
+1.  **Kontynuacja sukcesów poprzednich sezonów:**
+
+    -   Analiza sezonu 4 wskazuje na sukces wynikający z dobrych ocen poprzednich cykli. Warto zatem skoncentrować się na zachowaniu elementów, które przyciągnęły pozytywne opinie widzów, takich jak solidny scenariusz, dobrze skonstruowane postacie i ciekawa fabuła.
+
+    -   Kontynuacja wątków, które zdobyły popularność w poprzednich sezonach, może zbudować kontynuację zainteresowania widzów.
+
+2.  **Zachowanie ulubionych postaci:**
+
+    -   Znane i lubiane postacie są jednym z kluczowych elementów przyciągających widzów. Staranność w utrzymaniu równowagi między znanymi postaciami a wprowadzeniem nowych, fascynujących postaci, może przynieść korzyści, zachowując jednocześnie tożsamość serialu.
+
+3.  **Regularność i komunikacja:**
+
+    -   Unikanie długich przerw między sezonami może być kluczowe dla utrzymania zainteresowania widzów. Komunikacja z fanami poprzez media społecznościowe, zapowiedzi, za kulisami, czy relacje z planu, może utrzymać aktywność społeczności i budować napięcie przed premierą.
+
+4.  **Dopasowanie godzin transmisji:**
+
+    -   Analiza konkurencji i wybór optymalnych godzin transmisji może pomóc w unikaniu kolizji z innymi popularnymi produkcjami, co z kolei zwiększy szanse na przyciągnięcie większej widowni.
+
+5.  **Długość odcinków i reklam:**
+
+    -   Uważne dostosowanie długości odcinków do potrzeb fabuły i oczekiwań widzów jest kluczowe. Skrócenie długości bloków reklamowych oraz zminimalizowanie przerywania narracji mogą poprawić doświadczenie oglądania i zniwelować frustracje widzów.
+
+6.  **Innowacje w narracji:**
+
+    -   Eksperymentowanie z nowymi kierunkami w fabule, niespodziewane zwroty akcji lub wprowadzenie elementów niespotykanych wcześniej mogą przyciągnąć uwagę widzów i utrzymać ich zainteresowanie.
+
+7.  **Zaangażowanie widzów:**
+
+    -   Stworzenie interaktywnych kampanii marketingowych, konkursów czy platform do dyskusji online może zaangażować widzów w sposób, który wykracza poza samą emisję serialu.
+
+<hr/>
+
+Dziękuję za zapoznanie się z projektem.
+
+Przygotował: Emil Szewczak
+
+Przygotowano na zajęcia z Metod Pozyskiwania i Wizualizacji Danych
